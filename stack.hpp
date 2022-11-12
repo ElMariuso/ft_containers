@@ -6,7 +6,19 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 23:47:50 by root              #+#    #+#             */
-/*   Updated: 2022/11/12 23:47:50 by root             ###   ########.fr       */
+/*   Updated: 2022/11/12 23:53:59 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef STACK_HPP
+# define STACK_HPP
+
+namespace ft
+{
+    class stack
+    {
+
+    };
+}
+
+#endif

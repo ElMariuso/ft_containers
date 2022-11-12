@@ -6,7 +6,19 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 23:47:52 by root              #+#    #+#             */
-/*   Updated: 2022/11/12 23:47:53 by root             ###   ########.fr       */
+/*   Updated: 2022/11/12 23:53:50 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef VECTOR_HPP
+# define VECTOR_HPP
+
+namespace ft
+{
+    class vector
+    {
+
+    };
+}
+
+#endif
