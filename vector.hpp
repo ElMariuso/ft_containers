@@ -6,15 +6,22 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 23:47:52 by root              #+#    #+#             */
-/*   Updated: 2022/11/12 23:55:30 by root             ###   ########.fr       */
+/*   Updated: 2022/11/13 00:02:22 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VECTOR_HPP
 # define VECTOR_HPP
 
+/* Includes ***************************************************************** */
+
+# include <memory>
+
+/* Class ******************************************************************** */
+
 namespace ft
 {
+    template <class T, class Alloc = std::allocator<T>>
     class vector
     {
         public:
