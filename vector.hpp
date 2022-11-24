@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 23:47:52 by root              #+#    #+#             */
-/*   Updated: 2022/11/24 20:56:35 by root             ###   ########.fr       */
+/*   Updated: 2022/11/24 21:27:31 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ namespace ft
         typedef typename allocator_type::size_type                      size_type
 
         /* Member function ********************************************************** */
-        // Constructor
+        /***** Basic *****/
+        /* Constructor */
         explicit vector (const allocator_type& alloc = allocator_type())
         {
 
@@ -75,13 +76,13 @@ namespace ft
 
         }
 
-        // Destructor
+        /* Destructor */
         ~vector()
         {
             
         }
 
-        // Assignement operator
+        /* operator= */
         vector& operator=(const vector& x)
         {
             if (x == *this)
@@ -89,8 +90,26 @@ namespace ft
             return (*this);
         }
 
-        /* Iterators */
-        // begin
+        /* assign */
+        template <class InputIterator> 
+        void assign (InputIterator first, InputIterator last)
+        {
+            
+        }
+
+        void    assign(size_type n, const value_type& val)
+        {
+            
+        }
+
+        /* get_allocator */
+        allocator_type get_allocator() const
+        {
+            
+        }
+
+        /***** Iterators *****/
+        /* begin */
         iterator begin()
         {
 
@@ -101,7 +120,7 @@ namespace ft
 
         }
 
-        // end
+        /* end */
         iterator end()
         {
 
@@ -112,7 +131,7 @@ namespace ft
             
         }
 
-        // rbegin
+        /* rbegin */
         reverse_iterator    rbegin()
         {
 
@@ -123,7 +142,7 @@ namespace ft
             
         }
 
-        // rend
+        /* rend */
         reverse_iterator    rend()
         {
 
@@ -134,40 +153,38 @@ namespace ft
 
         }
 
-        // Others ?
-
-        /* Capacity */
-        // size
+        /***** Capacity *****/
+        /* size */
         size_type   size() const
         {
 
         }
 
-        // max_size
+        /* max_size */
         size_type   max_size() const
         {
             
         }
 
-        // resize
+        /* resize */
         void    resize(size_type n, value_type val = value_type())
         {
 
         }
 
-        // capacity
+        /* capacity */
         size_type   capacity() const
         {
             
         }
 
-        // empty
+        /* empty */
         bool    empty() const
         {
 
         }
 
-        // reserve
+        /* reserve */
         void    reserve(size_type n)
         {
             
@@ -175,8 +192,8 @@ namespace ft
 
         // Others ?
 
-        /* Element access */
-        // operator[]
+        /***** Element access *****/
+        /* operator[] */
         reference operator[]  (size_type n)
         {
 
@@ -187,7 +204,7 @@ namespace ft
             
         }
 
-        // at
+        /* at */
         reference at (size_type n)
         {
 
@@ -198,7 +215,7 @@ namespace ft
 
         }
 
-        // front
+        /* front */
         reference front()
         {
 
@@ -209,7 +226,7 @@ namespace ft
             
         }
 
-        // data
+        /* data */
         reference back()
         {
 
@@ -222,22 +239,21 @@ namespace ft
 
         // Others ?
 
-        /* Modifiers */
-        // assign
+        /***** Modifiers *****/
 
-        // push_back
+        /* push_back */
         void    push_back (const value_type& val)
         {
             
         }
 
-        // pop_back
+        /* pop_back */
         void    pop_back()
         {
             
         }
 
-        // insert
+        /* insert */
         iterator insert (iterator position, const value_type& val)
         {
 
@@ -254,7 +270,7 @@ namespace ft
             
         }
 
-        // erase
+        /* erase */
         iterator erase (iterator position)
         {
 
@@ -265,13 +281,13 @@ namespace ft
 
         }
 
-        // swap
+        /* swap */
         void    swap(vector& x)
         {
             
         }
 
-        // clear
+        /* clear */
         void    clear()
         {
             
@@ -279,15 +295,11 @@ namespace ft
 
         // Others ?
 
-        /* Allocator */
-
-        // Others ?
-
         private:
     };
 
     /* Non-member function overloads ******************************************** */
-    // relational operators
+    /* relational operators */
     template <class T, class Alloc>
     bool operator==(const vector<T, Alloc>& lhs, const vector<T, Alloc>& rhs)
     {
@@ -324,7 +336,7 @@ namespace ft
 
     }
 
-    // swap
+    /* swap */
     template <class T, class Alloc>
     void    swap (vector<T, Alloc>& x, vector<T, Alloc>& y)
     {
