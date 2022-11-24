@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 23:47:52 by root              #+#    #+#             */
-/*   Updated: 2022/11/24 21:27:31 by root             ###   ########.fr       */
+/*   Updated: 2022/11/24 21:48:24 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,51 @@ namespace ft
             
         }
 
+        /***** Element access *****/
+        /* at */
+        reference at (size_type n)
+        {
+
+        }
+
+        const_reference at (size_type n) const
+        {
+
+        }
+        
+        /* operator[] */
+        reference operator[]  (size_type n)
+        {
+
+        }
+
+        const_reference operator[] (size_type n) const
+        {
+            
+        }
+
+        /* front */
+        reference front()
+        {
+
+        }
+
+        const_reference front() const
+        {
+            
+        }
+
+        /* back */
+        reference back()
+        {
+
+        }
+
+        const_reference back() const
+        {
+            
+        }
+
         /***** Iterators *****/
         /* begin */
         iterator begin()
@@ -154,6 +199,12 @@ namespace ft
         }
 
         /***** Capacity *****/
+        /* empty */
+        bool    empty() const
+        {
+
+        }
+        
         /* size */
         size_type   size() const
         {
@@ -166,10 +217,10 @@ namespace ft
             
         }
 
-        /* resize */
-        void    resize(size_type n, value_type val = value_type())
+        /* reserve */
+        void    reserve(size_type n)
         {
-
+            
         }
 
         /* capacity */
@@ -178,77 +229,9 @@ namespace ft
             
         }
 
-        /* empty */
-        bool    empty() const
-        {
-
-        }
-
-        /* reserve */
-        void    reserve(size_type n)
-        {
-            
-        }
-
-        // Others ?
-
-        /***** Element access *****/
-        /* operator[] */
-        reference operator[]  (size_type n)
-        {
-
-        }
-
-        const_reference operator[] (size_type n) const
-        {
-            
-        }
-
-        /* at */
-        reference at (size_type n)
-        {
-
-        }
-
-        const_reference at (size_type n) const
-        {
-
-        }
-
-        /* front */
-        reference front()
-        {
-
-        }
-
-        const_reference front() const
-        {
-            
-        }
-
-        /* data */
-        reference back()
-        {
-
-        }
-
-        const_reference back() const
-        {
-            
-        }
-
-        // Others ?
-
         /***** Modifiers *****/
-
-        /* push_back */
-        void    push_back (const value_type& val)
-        {
-            
-        }
-
-        /* pop_back */
-        void    pop_back()
+        /* clear */
+        void    clear()
         {
             
         }
@@ -281,19 +264,29 @@ namespace ft
 
         }
 
+        /* push_back */
+        void    push_back (const value_type& val)
+        {
+            
+        }
+
+        /* pop_back */
+        void    pop_back()
+        {
+            
+        }
+
+        /* resize */
+        void    resize(size_type n, value_type val = value_type())
+        {
+
+        }
+
         /* swap */
         void    swap(vector& x)
         {
             
         }
-
-        /* clear */
-        void    clear()
-        {
-            
-        }
-
-        // Others ?
 
         private:
     };
