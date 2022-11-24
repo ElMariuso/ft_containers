@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 23:47:52 by root              #+#    #+#             */
-/*   Updated: 2022/11/24 21:48:24 by root             ###   ########.fr       */
+/*   Updated: 2022/11/24 22:13:04 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,67 +155,34 @@ namespace ft
 
         /***** Iterators *****/
         /* begin */
-        iterator begin()
-        {
+        iterator begin() { return (_begin); }
 
-        }
-
-        const_iterator begin() const
-        {
-
-        }
+        const_iterator begin() const { return (_begin); }
 
         /* end */
-        iterator end()
-        {
+        iterator end() { return (_end); }
 
-        }
-
-        const_iterator end() const
-        {
-            
-        }
+        const_iterator end() const { return (_end); }
 
         /* rbegin */
-        reverse_iterator    rbegin()
-        {
+        reverse_iterator    rbegin() { return (reverse_iterator(this->end())); }
 
-        }
-
-        const_reverse_iterator rbegin() const
-        {
-            
-        }
+        const_reverse_iterator rbegin() const { return (reverse_iterator(this->end())); }
 
         /* rend */
-        reverse_iterator    rend()
-        {
+        reverse_iterator    rend() { return (reverse_iterator(this->begin())); }
 
-        }
-
-        const_reverse_iterator  rend() const
-        {
-
-        }
+        const_reverse_iterator  rend() const { return (reverse_iterator(this->begin())); }
 
         /***** Capacity *****/
         /* empty */
-        bool    empty() const
-        {
-
-        }
+        bool    empty() const { return (this->size() == 0 ? true : false); }
         
         /* size */
-        size_type   size() const
-        {
-
-        }
+        size_type   size() const { return (this->_size) }
 
         /* max_size */
-        size_type   max_size() const
-        {
-            
-        }
+        size_type   max_size() const { return (allocator_type.max_size()); }
 
         /* reserve */
         void    reserve(size_type n)
@@ -289,6 +256,12 @@ namespace ft
         }
 
         private:
+            // value_type      *_data;
+            allocator_type  _alloc;
+            pointer         _begin;
+            pointer         _end;
+            size_type       _size;
+            size_type       _capacity;
     };
 
     /* Non-member function overloads ******************************************** */
