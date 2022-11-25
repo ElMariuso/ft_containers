@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 23:47:52 by root              #+#    #+#             */
-/*   Updated: 2022/11/24 22:13:04 by root             ###   ########.fr       */
+/*   Updated: 2022/11/25 11:33:53 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 /* Includes ***************************************************************** */
 
 # include <memory>
+# include <iostream>
+# include <stdexcept>
 
 /* Class ******************************************************************** */
 
@@ -85,9 +87,7 @@ namespace ft
         /* operator= */
         vector& operator=(const vector& x)
         {
-            if (x == *this)
-                return (*this);
-            return (*this);
+            
         }
 
         /* assign */
@@ -112,29 +112,27 @@ namespace ft
         /* at */
         reference at (size_type n)
         {
-
+            if (n > this->_size)
+                throw (out_of_range());
+            return (this->_start + n);
         }
 
         const_reference at (size_type n) const
         {
-
+            if (n > this->_size)
+                throw (out_of_range());
+            return (this->_start + n);
         }
         
         /* operator[] */
-        reference operator[]  (size_type n)
-        {
+        reference operator[]  (size_type n) { return (this->_start + n); }
 
-        }
-
-        const_reference operator[] (size_type n) const
-        {
-            
-        }
+        const_reference operator[] (size_type n) const { return (this->_start + n); }
 
         /* front */
         reference front()
         {
-
+            return (this->_start);
         }
 
         const_reference front() const
