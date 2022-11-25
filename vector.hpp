@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 23:47:52 by root              #+#    #+#             */
-/*   Updated: 2022/11/25 11:37:23 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/25 11:49:47 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,7 +168,7 @@ namespace ft
         size_type   size() const { return (this->_size) }
 
         /* max_size */
-        size_type   max_size() const { return (allocator_type.max_size()); }
+        size_type   max_size() const { return (this->_alloc.max_size()); }
 
         /* reserve */
         void    reserve(size_type n)
@@ -177,10 +177,7 @@ namespace ft
         }
 
         /* capacity */
-        size_type   capacity() const
-        {
-            
-        }
+        size_type   capacity() const { return (this->_capacity); }
 
         /***** Modifiers *****/
         /* clear */
@@ -238,7 +235,29 @@ namespace ft
         /* swap */
         void    swap(vector& x)
         {
-            
+            allocator_type  tmp_alloc;
+            pointer         tmp_begin;
+            pointer         tmp_end;
+            size_type       tmp_size;
+            size_type       tmp_capacity;
+
+            if (x == *this)
+                return ;
+            tmp_alloc = this->_alloc;
+            tmp_begin = this->_begin;
+            tmp_end = this->_end;
+            tmp_size = this->_size;
+            tmp_capacity = this->_capacity;
+            this->_alloc = x._alloc;
+            this->_begin = x._begin;
+            this->_end = x._end;
+            this->_size = x._size;
+            this->_capacity = x._capacity;
+            x._alloc = tmp_alloc;
+            x._begin = tmp_begin;
+            x._end = tmp_end;
+            x._size = tmp_size;
+            x._capacity = tmp_capacity;
         }
 
         private:
