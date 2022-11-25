@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 23:47:52 by root              #+#    #+#             */
-/*   Updated: 2022/11/25 11:49:47 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/25 11:52:26 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -261,7 +261,6 @@ namespace ft
         }
 
         private:
-            // value_type      *_data;
             allocator_type  _alloc;
             pointer         _begin;
             pointer         _end;
@@ -309,10 +308,7 @@ namespace ft
 
     /* swap */
     template <class T, class Alloc>
-    void    swap (vector<T, Alloc>& x, vector<T, Alloc>& y)
-    {
-        
-    }
+    void    swap (vector<T, Alloc>& x, vector<T, Alloc>& y) { x.swap(y); }
 }
 
 #endif
