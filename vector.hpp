@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 23:47:52 by root              #+#    #+#             */
-/*   Updated: 2022/11/25 11:33:53 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/25 11:37:23 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,26 +130,14 @@ namespace ft
         const_reference operator[] (size_type n) const { return (this->_start + n); }
 
         /* front */
-        reference front()
-        {
-            return (this->_start);
-        }
+        reference front() { return (this->_start); }
 
-        const_reference front() const
-        {
-            
-        }
+        const_reference front() const { return (this->_start); }
 
         /* back */
-        reference back()
-        {
+        reference back() { return (this->_end); }
 
-        }
-
-        const_reference back() const
-        {
-            
-        }
+        const_reference back() const { return (this->_end); }
 
         /***** Iterators *****/
         /* begin */
