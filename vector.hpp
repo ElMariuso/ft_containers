@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 23:47:52 by root              #+#    #+#             */
-/*   Updated: 2022/11/25 11:52:26 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/25 12:09:47 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,20 @@ namespace ft
         /* Constructor */
         explicit vector (const allocator_type& alloc = allocator_type())
         {
-
+            this->_alloc(alloc);
+            this->_begin = NULL;
+            this->_end = NULL;
+            this->_size = 0;
+            this->_capacity = 0;
         }
 
         explicit vector (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type())
         {
-            
+            this->_alloc(alloc);
+            // begin
+            // end
+            this->_size = n;
+            this->_capacity = n;
         }
 
         template <class InputIterator>
@@ -206,7 +214,7 @@ namespace ft
         /* erase */
         iterator erase (iterator position)
         {
-
+            this->_size--;
         }
 
         iterator erase (iterator first, iterator last)
