@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 23:47:52 by root              #+#    #+#             */
-/*   Updated: 2022/11/25 12:09:47 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/25 17:20:20 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@
 # include <memory>
 # include <iostream>
 # include <stdexcept>
+# include <vector>
+
+/* Includes.h *************************************************************** */
+
+# include "iterators/random_access_iterator.hpp"
 
 /* Class ******************************************************************** */
 
@@ -29,29 +34,17 @@ namespace ft
         public:
 
         /* Member types ************************************************************* */
-        /* The first template parameter (T) */
         typedef T                                                       value_type;
-        /* The second template parameter (Alloc) */
         typedef Alloc                                                   allocator_type;
-        /* allocator_type::reference */
         typedef typename allocator_type::reference                      reference;
-        /* allocator_type::const_reference */
         typedef typename allocator_type::const_reference                const_reference;
-        /* allocator_type::pointer */
         typedef typename allocator_type::pointer                        pointer;
-        /* allocator_type::const_pointer */
         typedef typename allocator_type::const_pointer                  const_pointer;
-        /* a random access iterator to value_type */
         typedef ft::random_access_iterator<value_type>                  iterator;
-        /* a random access iterator to const value_type */
         typedef ft::random_access_iterator<value_type>                  const_iterator;
-        /* reverse_iterator<iterator> */
         typedef ft::reverse_iterator<iterator>                          reverse_iterator;
-        /* reverse_iterator<const_iterator> */
         typedef ft::reverse_iterator<const_iterator>                    const_reverse_iterator;
-        /* a signal type identical to: iterator_traits<iterator>::difference_type */
-        typedef typename ft::iterator_traits<iterator>::difference_type difference_type
-        /* an unsigned integral type that can represent any non-negative value of difference_type */
+        // typedef typename ft::iterator_traits<iterator>::difference_type difference_type
         typedef typename allocator_type::size_type                      size_type
 
         /* Member function ********************************************************** */
@@ -61,7 +54,6 @@ namespace ft
         {
             this->_alloc(alloc);
             this->_begin = NULL;
-            this->_end = NULL;
             this->_size = 0;
             this->_capacity = 0;
         }
@@ -69,10 +61,9 @@ namespace ft
         explicit vector (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type())
         {
             this->_alloc(alloc);
-            // begin
-            // end
             this->_size = n;
             this->_capacity = n;
+            // begin
         }
 
         template <class InputIterator>
@@ -87,7 +78,7 @@ namespace ft
         }
 
         /* Destructor */
-        ~vector()
+        virtual ~vector()
         {
             
         }
@@ -102,7 +93,7 @@ namespace ft
         template <class InputIterator> 
         void assign (InputIterator first, InputIterator last)
         {
-            
+            // size_type new_size = blablabla();
         }
 
         void    assign(size_type n, const value_type& val)
@@ -143,20 +134,20 @@ namespace ft
         const_reference front() const { return (this->_start); }
 
         /* back */
-        reference back() { return (this->_end); }
+        reference back() { return (this->_start + this->_size - 1); }
 
-        const_reference back() const { return (this->_end); }
+        const_reference back() const { return (this->_start + this->_size - 1); }
 
         /***** Iterators *****/
         /* begin */
-        iterator begin() { return (_begin); }
+        iterator begin() { return (this->_begin); }
 
-        const_iterator begin() const { return (_begin); }
+        const_iterator begin() const { return (this->_begin); }
 
         /* end */
-        iterator end() { return (_end); }
+        iterator end() { return (this->_start + this->_size); }
 
-        const_iterator end() const { return (_end); }
+        const_iterator end() const { return (this->_start + this->_size); }
 
         /* rbegin */
         reverse_iterator    rbegin() { return (reverse_iterator(this->end())); }
@@ -214,7 +205,7 @@ namespace ft
         /* erase */
         iterator erase (iterator position)
         {
-            this->_size--;
+            
         }
 
         iterator erase (iterator first, iterator last)
@@ -245,7 +236,6 @@ namespace ft
         {
             allocator_type  tmp_alloc;
             pointer         tmp_begin;
-            pointer         tmp_end;
             size_type       tmp_size;
             size_type       tmp_capacity;
 
@@ -253,25 +243,22 @@ namespace ft
                 return ;
             tmp_alloc = this->_alloc;
             tmp_begin = this->_begin;
-            tmp_end = this->_end;
             tmp_size = this->_size;
             tmp_capacity = this->_capacity;
             this->_alloc = x._alloc;
             this->_begin = x._begin;
-            this->_end = x._end;
             this->_size = x._size;
             this->_capacity = x._capacity;
             x._alloc = tmp_alloc;
             x._begin = tmp_begin;
-            x._end = tmp_end;
             x._size = tmp_size;
             x._capacity = tmp_capacity;
         }
 
+        /* Attributes *************************************************************** */
         private:
             allocator_type  _alloc;
             pointer         _begin;
-            pointer         _end;
             size_type       _size;
             size_type       _capacity;
     };
