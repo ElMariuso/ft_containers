@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 23:47:52 by root              #+#    #+#             */
-/*   Updated: 2022/11/25 17:20:20 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/29 17:31:33 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,13 @@
 # include <memory>
 # include <iostream>
 # include <stdexcept>
+
 # include <vector>
+# include <type_traits>
 
 /* Includes.h *************************************************************** */
 
-# include "iterators/random_access_iterator.hpp"
+
 
 /* Class ******************************************************************** */
 
