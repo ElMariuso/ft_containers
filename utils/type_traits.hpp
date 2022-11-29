@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   type_traits.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 17:34:54 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/29 18:00:54 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/29 20:35:52 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,13 @@
 
 namespace ft
 {
+    /* enable_if ***************************************************************** */
+    template <bool B, class T = void>   struct enable_if {};
+    template <class T>
+    struct enable_if<true, T>
+    {
+        typedef T    type;
+    };
     /* integral_constant ********************************************************* */
     template <class T, T v>
     struct integral_constant
