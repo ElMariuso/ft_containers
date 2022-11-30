@@ -6,7 +6,7 @@
 #    By: root <root@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/12 23:47:43 by root              #+#    #+#              #
-#    Updated: 2022/11/30 21:42:09 by root             ###   ########.fr        #
+#    Updated: 2022/11/30 21:43:00 by root             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,6 +51,7 @@ dir:
 
 # Clean Only Objects
 clean:
+	$(RMF) $(OBJ_DIR)
 	$(RMF) $(OBJ)
 
 # Full Clean, Objects and Binaries
