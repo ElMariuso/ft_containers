@@ -6,12 +6,18 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 16:56:02 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/30 12:06:42 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/30 12:39:07 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ITERATOR_HPP
 # define ITERATOR_HPP
+
+/* Includes ***************************************************************** */
+
+# include <cstddef>
+
+/* Namespace **************************************************************** */
 
 namespace ft
 {
@@ -40,6 +46,29 @@ namespace ft
         typedef typename T&                         reference;
         typedef typename random_access_iterator_tag iterator_category;
     };
+    /* iterator ***************************************************************** */
+    template <class Category, class T, class Distance = std::ptrdiff_t, class Pointer = T*, class Reference = T&>
+    struct iterator
+    {
+        typedef typename Category   iterator_category;
+        typedef typename T          value_type;
+        typedef typename Distance   difference_type;
+        typedef typename Pointer    pointer;
+        typedef typename Reference  reference;
+    };
+    /* advance ****************************************************************** */
+    template <class InputIt>
+    void    advance (InputIt &i, typename iterator_traits<InputIt>::difference_type n, input_iterator_tag)
+    {
+        for (; n > 0; n--)
+            ++i;
+    }
+
+    template <class BiDirIt>
+    void    advance (BiDirIt &i, typename iterator_traits<BiDirIt>::difference_type n, bidirectional_iterator_tag)
+    {
+        
+    }
 }
 
 #endif
