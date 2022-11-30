@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 20:44:16 by root              #+#    #+#             */
-/*   Updated: 2022/11/30 17:25:27 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/30 17:31:00 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,9 @@ namespace ft
         typedef typename iterator_traits<InputIt2>::value_type  v2;
         return (equal(first1, last1, first1, equal_to<v1, v2>()))
     }
+    /* lexicographical_compare ************************************************** */
+    template <class InputIt1, class InputIt2, class Compare>
+    bool lexicographical_compare(InputIt1)
 }
 
 #endif
