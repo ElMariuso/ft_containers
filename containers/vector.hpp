@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 23:47:52 by root              #+#    #+#             */
-/*   Updated: 2022/11/30 17:00:26 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/30 18:49:32 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@
 
 /* Includes.h *************************************************************** */
 
-# include "utils/algorithm.hpp"
-# include "utils/iterator.hpp"
-# include "utils/type_traits.hpp"
-# include "utils/utility.hpp"
+# include "../utils/algorithm.hpp"
+# include "../utils/iterator.hpp"
+# include "../utils/type_traits.hpp"
+# include "../utils/utility.hpp"
 
 /* Class ******************************************************************** */
 
