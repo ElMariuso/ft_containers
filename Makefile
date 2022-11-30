@@ -6,7 +6,7 @@
 #    By: root <root@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/12 23:47:43 by root              #+#    #+#              #
-#    Updated: 2022/11/30 19:44:00 by root             ###   ########.fr        #
+#    Updated: 2022/11/30 19:50:59 by root             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,14 +24,16 @@ SRCS =  main.cpp \
 # Objects
 OBJ_DIR = $(SRCS_DIR)objs
 OBJS_F	= $(SRCS:.cpp=.o)
-OBJS	= $(addprefix $(OBJ_DIR)/,$(OBJS_F))
+OBJS	= $(addprefix $(OBJ_DIR)/, $(OBJS_F))
 
 # Includes
 # INCLUDE = /
 
-# Compilation
+# Compilation and commands
 CPP = c++
 FLAGS = -Wall -Wextra -Werror -std=c++98
+RM = rm
+RM_FLAGS = -rf
 
 # Rules *********************************************************************  #
 # Base
@@ -40,15 +42,15 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	$(CPP) $(FLAGS) $(OBJS) -o $(NAME)
 
-$(OBJ_DIR)%.o: $(SRCS_DIR)%.cpp
+$(OBJ_DIR)/%.o: $(SRCS_DIR)%.cpp
 	$(CPP) -c $(FLAGS) $?
 
 # Clean
 clean:
-	rm -rf $(OBJS)
+	$(RM) $(RM_FLAGS) $(OBJS) $(OBJ_DIR)
 
 fclean:	clean
-	rm -rf $(NAME)
+	$(RM) $(RM_FLAGS)f $(NAME)
 
 # Others
 re:	fclean all
