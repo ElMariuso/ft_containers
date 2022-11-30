@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 16:56:02 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/30 16:48:45 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/30 16:59:26 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 # include "type_traits.hpp"
 
 /* Namespace **************************************************************** */
-
 namespace ft
 {
     /* Types ******************************************************************** */
@@ -112,7 +111,7 @@ namespace ft
                         typename iterator_traits<_Iter>::reference>
     {
         private:
-            Iter    t;
+            Iter    t; /* Not used */
             
         protected:
             Iter    current;

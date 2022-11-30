@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 23:47:52 by root              #+#    #+#             */
-/*   Updated: 2022/11/30 12:18:48 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/30 17:00:26 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,11 @@
 # include <iterator>
 # include <vector>
 # include <type_traits>
+# include <algorithm>
 
 /* Includes.h *************************************************************** */
 
-# include "utils/algorithms.hpp"
+# include "utils/algorithm.hpp"
 # include "utils/iterator.hpp"
 # include "utils/type_traits.hpp"
 # include "utils/utility.hpp"
@@ -49,7 +50,7 @@ namespace ft
         typedef ft::random_access_iterator<value_type>                  iterator;
         typedef ft::random_access_iterator<value_type>                  const_iterator;
         typedef ft::reverse_iterator<iterator>                          reverse_iterator;
-        typedef ft::reverse_iterator<const_iterator>                    const_reverse_iterator;
+        typedef ft::reverse_iterator<iterator>                          const_reverse_iterator;
         typedef typename ft::iterator_traits<iterator>::difference_type difference_type
         typedef typename allocator_type::size_type                      size_type
 
