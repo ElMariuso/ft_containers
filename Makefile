@@ -6,7 +6,7 @@
 #    By: root <root@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/12 23:47:43 by root              #+#    #+#              #
-#    Updated: 2022/12/01 14:53:55 by root             ###   ########.fr        #
+#    Updated: 2022/12/01 15:35:20 by root             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,6 @@ INC		=	-I/$(INC_DIR)
 # Sources and Objects
 SRC 	=	main.cpp \
 			algorithm_test.cpp \
-			iterator_test.cpp \
 			type_traits_test.cpp \
 			utility_test.cpp \
 			vector_test.cpp \
