@@ -6,7 +6,7 @@
 #    By: root <root@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/12 23:47:43 by root              #+#    #+#              #
-#    Updated: 2022/11/30 22:01:05 by root             ###   ########.fr        #
+#    Updated: 2022/12/01 14:17:13 by root             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,10 @@ SRC 	=	main.cpp \
 			algorithm_test.cpp \
 			iterator_test.cpp \
 			type_traits_test.cpp \
-			utility_test.cpp
+			utility_test.cpp \
+			vector_test.cpp \
+			stack_test.cpp \
+			map_test.cpp
 
 OBJ		=	$(SRC:.cpp=.o)
 OBJS	=	$(addprefix $(OBJ_DIR)/, $(OBJ))
