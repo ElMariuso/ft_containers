@@ -6,17 +6,20 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:52:24 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/30 22:02:46 by root             ###   ########.fr       */
+/*   Updated: 2022/12/01 14:09:29 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /* Includes.h *************************************************************** */
 
-#include "../inc/utils/type_traits.hpp"
+#include "ft_containers.hpp"
 
 /* Functions **************************************************************** */
 
-void    type_traits()
+template <class T>
+typename ft::enable_if<std_is_integral>
+
+void    testing_type_traits()
 {
-    
+
 }
