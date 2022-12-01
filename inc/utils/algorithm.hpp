@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 20:44:16 by root              #+#    #+#             */
-/*   Updated: 2022/11/30 22:06:08 by root             ###   ########.fr       */
+/*   Updated: 2022/12/01 15:41:34 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,13 @@ namespace ft
     }
     /* lexicographical_compare ************************************************** */
     // template <class InputIt1, class InputIt2, class Compare>
-    // bool lexicographical_compare(InputIt1)
+    // bool lexicographical_compare(InputIt1 first1, InputIt1 last1, InputIt2 first2, InputIt2 last2, Compare comp)
+    // {
+        
+    // }
+
+    // template <class InputIt1, class InputIt2>
+    // bool lexicographical_compare(InputIt1 first1, InputIt1 last1, InputIt2 first2, InputIt2 last2)
     // {
         
     // }
