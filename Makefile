@@ -6,7 +6,7 @@
 #    By: root <root@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/12 23:47:43 by root              #+#    #+#              #
-#    Updated: 2022/12/01 14:17:13 by root             ###   ########.fr        #
+#    Updated: 2022/12/01 14:53:55 by root             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,8 +49,9 @@ OBJ		=	$(SRC:.cpp=.o)
 OBJS	=	$(addprefix $(OBJ_DIR)/, $(OBJ))
 
 # Default Make
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp dir
-	@$(CC) $(FLAGS) -c -o $@ $< $(INC)
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
+	@mkdir -p $(OBJ_DIR)
+	@$(CC) $(FLAGS) -c $< $(INC) -o $@
 
 $(NAME): $(OBJS)
 	@echo "$(GREEN)Objects created!$(RESET)"
@@ -58,11 +59,6 @@ $(NAME): $(OBJS)
 	@echo "$(GREEN)Tester compiled!$(RESET)"
 
 all: $(NAME)
-
-# Make the Directories
-dir:
-	@mkdir -p $(OBJ_DIR)
-	@echo "$(GREEN)Objects directory created!$(RESET)"
 
 # Clean Only Objects
 clean:
