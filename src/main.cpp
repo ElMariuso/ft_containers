@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 18:49:05 by root              #+#    #+#             */
-/*   Updated: 2022/12/01 15:18:00 by root             ###   ########.fr       */
+/*   Updated: 2022/12/01 15:19:29 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,6 @@ int main()
 {
     std::cout << "/*** type_traits tests ***/" << std::endl << std::endl;
     
-    std::cout << "/* enable_if */" << std::endl;
+    std::cout << "/* enable_if and is_integral */" << std::endl;
     testing_type_traits();
 }

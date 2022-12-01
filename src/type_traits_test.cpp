@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:52:24 by mthiry            #+#    #+#             */
-/*   Updated: 2022/12/01 15:09:53 by root             ###   ########.fr       */
+/*   Updated: 2022/12/01 15:19:38 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ typename ft::enable_if<ft::is_integral<T>::value, bool>::type
 
 void    testing_type_traits(void)
 {
-    /* enable_if ***************************************************************** */
+    /* enable_if and is_integral ***************************************************************** */
     short int   i;
     std::string j;
 
