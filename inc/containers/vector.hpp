@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 23:47:52 by root              #+#    #+#             */
-/*   Updated: 2022/12/02 17:23:30 by root             ###   ########.fr       */
+/*   Updated: 2022/12/02 17:37:59 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,20 +32,20 @@ namespace ft
     template <class T, class Alloc = std::allocator<T> >
     class vector
     {
+        /* Member types ************************************************************* */
         public:
-            /* Member types ************************************************************* */
-            typedef Alloc                                                       allocator_type;
-            typedef typename allocator_type::size_type                          size_type;
-        protected:
-            /* Member types ************************************************************* */
             typedef T                                                           value_type;
+            typedef Alloc                                                       allocator_type;
             typedef value_type&                                                 reference;
             typedef const value_type&                                           const_reference;
+            typedef typename allocator_type::size_type                          size_type;
             typedef typename ft::iterator_traits<value_type>::difference_type   difference_type;
             typedef typename ft::iterator_traits<value_type>::pointer           pointer;
             typedef const typename ft::iterator_traits<value_type>::pointer     const_pointer;
             typedef pointer                                                     iterator;
             typedef const_pointer                                               const_iterator;
+            typedef ft::reverse_iterator<iterator>                              reverse_iterator;
+            typedef ft::reverse_iterator<const_iterator>                        const_reverse_iterator;
 
         /* Attributes *************************************************************** */
         // private:
