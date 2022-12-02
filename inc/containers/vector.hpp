@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 23:47:52 by root              #+#    #+#             */
-/*   Updated: 2022/12/02 20:02:59 by root             ###   ########.fr       */
+/*   Updated: 2022/12/02 20:05:25 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,10 +108,15 @@ namespace ft
         }
 
         // /* operator= */
-        // vector& operator=(const vector& x)
-        // {
-            
-        // }
+        vector& operator=(const vector& x)
+        {
+            this->_alloc = x._alloc;
+            this->_begin = x._begin;
+            this->_size = x._size;
+            this->_capacity = x._capacity;
+            for (size_t i = 0; i != this->_size; i++)
+                this->_alloc.construct(this->_begin + i, x[i]);
+        }
 
         // /* assign */
         // template <class InputIterator> 
