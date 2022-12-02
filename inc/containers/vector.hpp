@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 23:47:52 by root              #+#    #+#             */
-/*   Updated: 2022/12/02 22:44:11 by root             ###   ########.fr       */
+/*   Updated: 2022/12/02 23:09:18 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,11 +189,22 @@ namespace ft
         size_type   max_size() const { return (this->_alloc.max_size()); }
 
         /* reserve */
-        // void    reserve(size_type n)
-        // {
-        //     if (n > this->capacity())
-        //         throw (std::length_error());
-        // }
+        void    reserve(size_type n)
+        {
+            if (n > this->capacity())
+                throw (std::length_error());
+            else if (n <= this->_capacity)
+                return ;
+            pointer tmp = this->_alloc.allocate(n);
+            for (size_t i = 0; i != this->_size; i++)
+            {
+                this->_alloc.construct(tmp + i, this->_begin[i]);
+                this->_alloc.destroy(this->_begin + i);
+            }
+            this->_alloc.deallocate(this->_begin, this->_capacity);
+            this->_capacity = n;
+            this->_begin = tmp;
+        }
 
         /* capacity */
         size_type   capacity() const { return (this->_capacity); }
@@ -236,11 +247,14 @@ namespace ft
 
         // }
 
-        // /* push_back */
-        // void    push_back (const value_type& val)
-        // {
-            
-        // }
+        /* push_back */
+        void    push_back (const value_type& val)
+        {
+            if (this->_size == this->_capacity)
+                this->reserve(this->_size + 1);
+            this->_size++;
+            this->back() = val;
+        }
 
         /* pop_back */
         void    pop_back()
