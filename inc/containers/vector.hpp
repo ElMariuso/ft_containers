@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 23:47:52 by root              #+#    #+#             */
-/*   Updated: 2022/12/02 19:49:41 by root             ###   ########.fr       */
+/*   Updated: 2022/12/02 20:02:59 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,67 +131,67 @@ namespace ft
             
         // }
 
-        // /***** Element access *****/
-        // /* at */
-        // reference at (size_type n)
-        // {
-        //     if (n > this->_size)
-        //         throw (out_of_range());
-        //     return (this->_start + n);
-        // }
+        /***** Element access *****/
+        /* at */
+        reference at (size_type n)
+        {
+            if (n > this->_size)
+                throw (std::out_of_range());
+            return (this->_start + n);
+        }
 
-        // const_reference at (size_type n) const
-        // {
-        //     if (n > this->_size)
-        //         throw (out_of_range());
-        //     return (this->_start + n);
-        // }
+        const_reference at (size_type n) const
+        {
+            if (n > this->_size)
+                throw (std::out_of_range());
+            return (this->_start + n);
+        }
         
-        // /* operator[] */
-        // reference operator[]  (size_type n) { return (this->_start + n); }
+        /* operator[] */
+        reference operator[]  (size_type n) { return (this->_start + n); }
 
-        // const_reference operator[] (size_type n) const { return (this->_start + n); }
+        const_reference operator[] (size_type n) const { return (this->_start + n); }
 
-        // /* front */
-        // reference front() { return (this->_start); }
+        /* front */
+        reference front() { return (this->_start); }
 
-        // const_reference front() const { return (this->_start); }
+        const_reference front() const { return (this->_start); }
 
-        // /* back */
-        // reference back() { return (this->_start + this->_size - 1); }
+        /* back */
+        reference back() { return (this->_start + this->_size - 1); }
 
-        // const_reference back() const { return (this->_start + this->_size - 1); }
+        const_reference back() const { return (this->_start + this->_size - 1); }
 
-        // /***** Iterators *****/
-        // /* begin */
-        // iterator begin() { return (this->_begin); }
+        /***** Iterators *****/
+        /* begin */
+        iterator begin() { return (this->_begin); }
 
-        // const_iterator begin() const { return (this->_begin); }
+        const_iterator begin() const { return (this->_begin); }
 
-        // /* end */
-        // iterator end() { return (this->_start + this->_size); }
+        /* end */
+        iterator end() { return (this->_start + this->_size); }
 
-        // const_iterator end() const { return (this->_start + this->_size); }
+        const_iterator end() const { return (this->_start + this->_size); }
 
-        // /* rbegin */
-        // reverse_iterator    rbegin() { return (reverse_iterator(this->end())); }
+        /* rbegin */
+        reverse_iterator    rbegin() { return (reverse_iterator(this->end())); }
 
-        // const_reverse_iterator rbegin() const { return (reverse_iterator(this->end())); }
+        const_reverse_iterator rbegin() const { return (reverse_iterator(this->end())); }
 
-        // /* rend */
-        // reverse_iterator    rend() { return (reverse_iterator(this->begin())); }
+        /* rend */
+        reverse_iterator    rend() { return (reverse_iterator(this->begin())); }
 
-        // const_reverse_iterator  rend() const { return (reverse_iterator(this->begin())); }
+        const_reverse_iterator  rend() const { return (reverse_iterator(this->begin())); }
 
-        // /***** Capacity *****/
-        // /* empty */
-        // bool    empty() const { return (this->size() == 0 ? true : false); }
+        /***** Capacity *****/
+        /* empty */
+        bool    empty() const { return (this->size() == 0 ? true : false); }
         
-        // /* size */
-        // size_type   size() const { return (this->_size) }
+        /* size */
+        size_type   size() const { return (this->_size); }
 
-        // /* max_size */
-        // size_type   max_size() const { return (this->_alloc.max_size()); }
+        /* max_size */
+        size_type   max_size() const { return (this->_alloc.max_size()); }
 
         // /* reserve */
         // void    reserve(size_type n)
