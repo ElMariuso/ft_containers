@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 13:54:24 by root              #+#    #+#             */
-/*   Updated: 2022/12/01 14:48:39 by root             ###   ########.fr       */
+/*   Updated: 2022/12/02 13:16:25 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 /* Containers *************************************************************** */
 
-// # include "../inc/containers/vector.hpp"
+# include "../inc/containers/vector.hpp"
 // # include "../inc/containers/stack.hpp"
 // # include "../inc/containers/map.hpp"
 
