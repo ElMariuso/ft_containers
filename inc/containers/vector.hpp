@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 23:47:52 by root              #+#    #+#             */
-/*   Updated: 2022/12/02 20:14:50 by root             ###   ########.fr       */
+/*   Updated: 2022/12/02 20:15:11 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,8 +193,8 @@ namespace ft
             
         // }
 
-        // /* capacity */
-        // size_type   capacity() const { return (this->_capacity); }
+        /* capacity */
+        size_type   capacity() const { return (this->_capacity); }
 
         // /***** Modifiers *****/
         // /* clear */
