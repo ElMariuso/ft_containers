@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 23:47:52 by root              #+#    #+#             */
-/*   Updated: 2022/12/02 22:36:59 by root             ###   ########.fr       */
+/*   Updated: 2022/12/02 22:44:11 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -242,11 +242,14 @@ namespace ft
             
         // }
 
-        // /* pop_back */
-        // void    pop_back()
-        // {
-            
-        // }
+        /* pop_back */
+        void    pop_back()
+        {
+            if (this->_size == 0)
+                return ;
+            this->_alloc.destroy(this->_begin + this->_size - 1);
+            this->_size--;
+        }
 
         // /* resize */
         // void    resize(size_type n, value_type val = value_type())
