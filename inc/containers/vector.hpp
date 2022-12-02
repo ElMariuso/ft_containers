@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 23:47:52 by root              #+#    #+#             */
-/*   Updated: 2022/12/02 20:05:25 by root             ###   ########.fr       */
+/*   Updated: 2022/12/02 20:12:30 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,11 +130,8 @@ namespace ft
             
         // }
 
-        // /* get_allocator */
-        // allocator_type get_allocator() const
-        // {
-            
-        // }
+        /* get_allocator */
+        allocator_type get_allocator() const { return (this->_alloc); }
 
         /***** Element access *****/
         /* at */
