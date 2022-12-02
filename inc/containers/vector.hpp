@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 23:47:52 by root              #+#    #+#             */
-/*   Updated: 2022/12/02 22:12:09 by root             ###   ########.fr       */
+/*   Updated: 2022/12/02 22:36:59 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -228,6 +228,7 @@ namespace ft
         // iterator erase (iterator position)
         // {
             
+        //     this->_size--;
         // }
 
         // iterator erase (iterator first, iterator last)
