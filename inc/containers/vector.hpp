@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 23:47:52 by root              #+#    #+#             */
-/*   Updated: 2022/12/02 23:39:52 by root             ###   ########.fr       */
+/*   Updated: 2022/12/03 00:12:09 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,16 +118,16 @@ namespace ft
                 this->_alloc.construct(this->_begin + i, x[i]);
         }
 
-        /* assign */
-        template <class InputIterator> 
-        void assign (InputIterator first, InputIterator last)
-        {
+        // /* assign */
+        // template <class InputIterator> 
+        // void assign (InputIterator first, InputIterator last)
+        // {
             
-        }
-        void    assign(size_type n, const value_type& val)
-        {
+        // }
+        // void    assign(size_type n, const value_type& val)
+        // {
             
-        }
+        // }
 
         /* get_allocator */
         allocator_type get_allocator() const { return (this->_alloc); }
