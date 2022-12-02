@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 23:47:52 by root              #+#    #+#             */
-/*   Updated: 2022/12/02 17:37:59 by root             ###   ########.fr       */
+/*   Updated: 2022/12/02 18:20:45 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,51 +46,59 @@ namespace ft
             typedef const_pointer                                               const_iterator;
             typedef ft::reverse_iterator<iterator>                              reverse_iterator;
             typedef ft::reverse_iterator<const_iterator>                        const_reverse_iterator;
-
-        /* Attributes *************************************************************** */
-        // private:
-        //     allocator_type  _alloc;
-        //     pointer         _begin;
-        //     size_type       _size;
-        //     size_type       _capacity;
-
         
+        /* Attributes *************************************************************** */
+        private:
+            allocator_type  _alloc;
+            pointer         _begin;
+            size_type       _size;
+            size_type       _capacity;
 
-        /* Member function ********************************************************** */
+        public:
+        /* Member functions ********************************************************* */
         /***** Basic *****/
         /* Constructor */
-        // explicit vector (const allocator_type& alloc = allocator_type())
-        // {
-        //     this->_alloc(alloc);
-        //     this->_begin = NULL;
-        //     this->_size = 0;
-        //     this->_capacity = 0;
-        // }
+        vector(): _alloc(Alloc()), _begin(NULL), _size(0), _capacity(0) {}
 
-        // explicit vector (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type())
-        // {
-        //     this->_alloc(alloc);
-        //     this->_size = n;
-        //     this->_capacity = n;
-        //     // begin
-        // }
+        explicit vector(const allocator_type &alloc = allocator_type())
+            : _alloc(alloc), _begin(NULL), _size(0), _capacity(0) { }
 
-        // template <class InputIterator>
-        // vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type())
-        // {
-            
-        // }
+        explicit vector(size_type n, const value_type &val = value_type(),
+            const allocator_type &alloc = allocator_type())
+        {
+            this->_alloc = alloc;
+            // if (n >= this->_alloc.max_size())
+            //     throw(too_big)
+            this->_begin = this->_alloc.allocate(n);
+            this->_size = n;
+            this->_capacity = n;
+            for (size_t i = 0; i != n; i++)
+                this->_alloc.construct(this->_begin + i, val);
+        }
 
-        // vector (const vector& x)
-        // {
+        template <class InputIterator>
+        vector(InputIterator first, InputIterator last, const allocator_type &alloc = allocator_type())
+        {
+            this->_alloc = alloc;
+            this->_begin = first;
+            // this->_size = ;
+            // this->_capacity = ;
+        }
 
-        // }
+        vector(const vector &x): _alloc(x._alloc), _begin(_alloc.allocate(x._size)),
+            _size(x._size), _capacity(x._capacity)
+        {
+            for (size_t i = 0; i != this->_size; i++)
+                this->_alloc.construct(this->_begin + i, x[i]);
+        }
 
         // /* Destructor */
-        // virtual ~vector()
-        // {
-            
-        // }
+        virtual ~vector()
+        {
+            for (size_t i = 0; i < this->_size; i++)
+                this->_alloc.destroy(this->_begin + i);
+            this->_alloc.deallocate(this->_begin, this->_count);
+        }
 
         // /* operator= */
         // vector& operator=(const vector& x)
