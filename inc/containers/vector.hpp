@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 23:47:52 by root              #+#    #+#             */
-/*   Updated: 2022/12/02 20:15:11 by root             ###   ########.fr       */
+/*   Updated: 2022/12/02 22:12:09 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ namespace ft
             this->_alloc.deallocate(this->_begin, this->_count);
         }
 
-        // /* operator= */
+        /* operator= */
         vector& operator=(const vector& x)
         {
             this->_alloc = x._alloc;
@@ -122,9 +122,10 @@ namespace ft
         // template <class InputIterator> 
         // void assign (InputIterator first, InputIterator last)
         // {
-        //     // size_type new_size = blablabla();
+        //     size_type   new_size;
+            
+        //     new_size = ft::distance(first, last);
         // }
-
         // void    assign(size_type n, const value_type& val)
         // {
             
@@ -187,21 +188,24 @@ namespace ft
         /* max_size */
         size_type   max_size() const { return (this->_alloc.max_size()); }
 
-        // /* reserve */
+        /* reserve */
         // void    reserve(size_type n)
         // {
-            
+        //     if (n > this->capacity())
+        //         throw (std::length_error());
         // }
 
         /* capacity */
         size_type   capacity() const { return (this->_capacity); }
 
-        // /***** Modifiers *****/
-        // /* clear */
-        // void    clear()
-        // {
-            
-        // }
+        /***** Modifiers *****/
+        /* clear */
+        void    clear()
+        {
+            for (size_t i = 0; i != this->_size; i++)
+                this->_alloc.destroy(this->_begin + i);    
+            this->_size = 0;
+        }
 
         // /* insert */
         // iterator insert (iterator position, const value_type& val)
@@ -246,7 +250,7 @@ namespace ft
         // /* resize */
         // void    resize(size_type n, value_type val = value_type())
         // {
-
+            
         // }
 
         // /* swap */
