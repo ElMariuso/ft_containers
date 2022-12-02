@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 23:47:52 by root              #+#    #+#             */
-/*   Updated: 2022/12/02 18:20:45 by root             ###   ########.fr       */
+/*   Updated: 2022/12/02 19:49:41 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,6 @@ namespace ft
             const allocator_type &alloc = allocator_type())
         {
             this->_alloc = alloc;
-            // if (n >= this->_alloc.max_size())
-            //     throw(too_big)
             this->_begin = this->_alloc.allocate(n);
             this->_size = n;
             this->_capacity = n;
@@ -77,12 +75,21 @@ namespace ft
         }
 
         template <class InputIterator>
-        vector(InputIterator first, InputIterator last, const allocator_type &alloc = allocator_type())
+        vector(InputIterator first, InputIterator last,
+            const allocator_type &alloc = allocator_type(),
+            typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL)
         {
+            difference_type n;
+
+            n = ft::distance(first, last);
             this->_alloc = alloc;
-            this->_begin = first;
-            // this->_size = ;
-            // this->_capacity = ;
+            this->_begin = this->_alloc.allocate(n);
+            this->_size = n;
+            this->_capacity = n;
+            for (size_t i = 0; first != last; ++first, ++i)
+            {
+                this->_alloc.construct(this->begin + i, *first);
+            }
         }
 
         vector(const vector &x): _alloc(x._alloc), _begin(_alloc.allocate(x._size)),
@@ -92,7 +99,7 @@ namespace ft
                 this->_alloc.construct(this->_begin + i, x[i]);
         }
 
-        // /* Destructor */
+        /* Destructor */
         virtual ~vector()
         {
             for (size_t i = 0; i < this->_size; i++)
