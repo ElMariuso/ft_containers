@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 23:47:52 by root              #+#    #+#             */
-/*   Updated: 2022/12/02 23:09:18 by root             ###   ########.fr       */
+/*   Updated: 2022/12/02 23:39:52 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,18 +118,16 @@ namespace ft
                 this->_alloc.construct(this->_begin + i, x[i]);
         }
 
-        // /* assign */
-        // template <class InputIterator> 
-        // void assign (InputIterator first, InputIterator last)
-        // {
-        //     size_type   new_size;
+        /* assign */
+        template <class InputIterator> 
+        void assign (InputIterator first, InputIterator last)
+        {
             
-        //     new_size = ft::distance(first, last);
-        // }
-        // void    assign(size_type n, const value_type& val)
-        // {
+        }
+        void    assign(size_type n, const value_type& val)
+        {
             
-        // }
+        }
 
         /* get_allocator */
         allocator_type get_allocator() const { return (this->_alloc); }
@@ -268,7 +266,6 @@ namespace ft
         // /* resize */
         // void    resize(size_type n, value_type val = value_type())
         // {
-            
         // }
 
         // /* swap */
@@ -277,7 +274,6 @@ namespace ft
             
         // }
     };
-
     /* Non-member function overloads ******************************************** */
     /* relational operators */
     // template <class T, class Alloc>
