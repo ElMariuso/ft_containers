@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 23:47:52 by root              #+#    #+#             */
-/*   Updated: 2022/12/03 00:28:07 by root             ###   ########.fr       */
+/*   Updated: 2022/12/03 00:45:22 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -233,17 +233,21 @@ namespace ft
             
         // }
 
-        // /* erase */
-        // iterator erase (iterator position)
-        // {
+        /* erase */
+        iterator erase (iterator position)
+        {
+            iterator ret;
             
-        //     this->_size--;
-        // }
+            ret = position;
+            ret++;
+            this->_alloc.destroy(position);
+            return (ret);
+        }
 
-        // iterator erase (iterator first, iterator last)
-        // {
+        iterator erase (iterator first, iterator last)
+        {
 
-        // }
+        }
 
         /* push_back */
         void    push_back (const value_type& val)
