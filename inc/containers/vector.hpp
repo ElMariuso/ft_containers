@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 23:47:52 by root              #+#    #+#             */
-/*   Updated: 2022/12/03 00:12:09 by root             ###   ########.fr       */
+/*   Updated: 2022/12/03 00:28:07 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -268,11 +268,27 @@ namespace ft
         // {
         // }
 
-        // /* swap */
-        // void    swap(vector& x)
-        // {
-            
-        // }
+        /* swap */
+        void    swap(vector& x)
+        {
+            swap(this->_alloc, x._alloc);
+            swap(this->_begin, x._begin);
+            swap(this->_size, x._size);
+            swap(this->_capacity, x._capacity);
+        }
+
+        /***** Utils Functions *****/
+        private:
+        /* swap_utils */
+        template <class F>
+        void swap(F &a, F &b)
+        {
+            F   tmp;
+
+            tmp = a;
+            a = b;
+            b = tmp;
+        }
     };
     /* Non-member function overloads ******************************************** */
     /* relational operators */
