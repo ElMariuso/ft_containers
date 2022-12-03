@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 23:47:52 by root              #+#    #+#             */
-/*   Updated: 2022/12/03 14:17:02 by root             ###   ########.fr       */
+/*   Updated: 2022/12/03 17:50:43 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,7 @@ namespace ft
             this->_size = n;
             this->_capacity = n;
             for (size_t i = 0; first != last; ++first, ++i)
-            {
                 this->_alloc.construct(this->begin + i, *first);
-            }
         }
 
         vector(const vector &x): _alloc(x._alloc), _begin(_alloc.allocate(x._size)),
@@ -332,9 +330,9 @@ namespace ft
 
     // }
 
-    // /* swap */
-    // template <class T, class Alloc>
-    // void    swap (vector<T, Alloc>& x, vector<T, Alloc>& y) { x.swap(y); }
+    /* swap */
+    template <class T, class Alloc>
+    void    swap (vector<T, Alloc>& x, vector<T, Alloc>& y) { x.swap(y); }
 }
 
 #endif
