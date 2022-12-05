@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 23:47:52 by root              #+#    #+#             */
-/*   Updated: 2022/12/05 11:18:01 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/12/05 11:30:29 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,18 @@ namespace ft
         template <class InputIterator> 
         void assign (InputIterator first, InputIterator last)
         {
-            
+            difference_type n;
+
+            n = ft::distance(first, last);
+            if (n > this->_capacity)
+            {
+                this->reserve(n);
+                this->_capacity = n;
+            }
+            this->clear();
+            for (size_t i = 0; i != n; i++)
+                this->_alloc.construct(this->_begin + i, first + i);
+            this->_size = n;
         }
         void    assign(size_type n, const value_type& val)
         {
