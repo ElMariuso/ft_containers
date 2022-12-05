@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 23:47:52 by root              #+#    #+#             */
-/*   Updated: 2022/12/05 23:02:06 by root             ###   ########.fr       */
+/*   Updated: 2022/12/05 23:14:49 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,8 @@ namespace ft
 
         explicit vector(size_type n, const value_type &val = value_type(),
             const allocator_type &alloc = allocator_type())
+            : _alloc(alloc), _begin(this->_alloc.allocate(n)), _size(n), _capacity(n)
         {
-            this->_alloc = alloc;
-            this->_begin = this->_alloc.allocate(n);
-            this->_size = n;
-            this->_capacity = n;
             for (size_t i = 0; i != n; i++)
                 this->_alloc.construct(this->_begin + i, val);
         }
