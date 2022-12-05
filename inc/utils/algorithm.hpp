@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   algorithm.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 20:44:16 by root              #+#    #+#             */
-/*   Updated: 2022/12/01 15:41:34 by root             ###   ########.fr       */
+/*   Updated: 2022/12/05 10:46:05 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ namespace ft
     {
         typedef typename iterator_traits<InputIt1>::value_type  v1;
         typedef typename iterator_traits<InputIt2>::value_type  v2;
-        return (equal(first1, last1, first1, equal_to<v1, v2>()));
+        return (equal(first1, last1, first2, equal_to<v1, v2>()));
     }
     /* lexicographical_compare ************************************************** */
     // template <class InputIt1, class InputIt2, class Compare>

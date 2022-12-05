@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 23:47:52 by root              #+#    #+#             */
-/*   Updated: 2022/12/03 17:50:43 by root             ###   ########.fr       */
+/*   Updated: 2022/12/05 10:48:52 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,14 +134,14 @@ namespace ft
         /* at */
         reference at (size_type n)
         {
-            if (n > this->_size)
-                throw (std::out_of_range());
+            // if (n > this->_size)
+            //     throw (std::out_of_range());
             return (this->_start + n);
         }
         const_reference at (size_type n) const
         {
-            if (n > this->_size)
-                throw (std::out_of_range());
+            // if (n > this->_size)
+            //     throw (std::out_of_range());
             return (this->_start + n);
         }
         
@@ -187,9 +187,9 @@ namespace ft
         /* reserve */
         void    reserve(size_type n)
         {
-            if (n > this->capacity())
-                throw (std::length_error());
-            else if (n <= this->_capacity)
+            // if (n > this->capacity())
+            //     throw (std::length_error());
+            if (n <= this->_capacity)
                 return ;
             pointer tmp = this->_alloc.allocate(n);
             for (size_t i = 0; i != this->_size; i++)
@@ -248,7 +248,7 @@ namespace ft
         // }
 
         /* push_back */
-        void    push_back (const value_type& val)
+        void    push_back(const value_type& val)
         {
             if (this->_size == this->_capacity)
                 this->reserve(this->_size + 1);
@@ -265,10 +265,27 @@ namespace ft
             this->_size--;
         }
 
-        // /* resize */
-        // void    resize(size_type n, value_type val = value_type())
-        // {
-        // }
+        /* resize */
+        void    resize(size_type n, value_type val = value_type())
+        {
+            if (n < this->_size)
+            {
+                for (size_t i = n; i != this->_size; i--)
+                    this->pop_back();
+                this->_size = n;
+            }
+            else if (n > this->_size)
+            {
+                if (n > this->_capacity)
+                {
+                    this->reserve(n);
+                    this->_capacity = n;
+                }
+                for (size_t i = this->_size; i != n; i++)
+                    this->push_back(val);
+                this->_size = n;
+            }
+        }
 
         /* swap */
         void    swap(vector& x)
