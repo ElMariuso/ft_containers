@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   iterator.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 16:56:02 by mthiry            #+#    #+#             */
-/*   Updated: 2022/12/05 18:53:28 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/12/05 21:12:50 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -235,127 +235,6 @@ namespace ft
     template <class Iter1, class Iter2>
     typename reverse_iterator<Iter1>::difference_type
     operator-(const reverse_iterator<Iter1> &lhs, const reverse_iterator<Iter2> &rhs)
-    {
-        return (rhs.base() - lhs.base());
-    }
-
-    /* vt_iterator ************************************************************** */
-    template <class Iter>
-    class vt_iterator :
-        public ft::iterator<typename ft::iterator_traits<Iter>::iterator_category, typename ft::iterator_traits<Iter>::value_type,
-                        typename ft::iterator_traits<Iter>::difference_type, typename ft::iterator_traits<Iter>::pointer,
-                        typename ft::iterator_traits<Iter>::reference>
-    {       
-        protected:
-            Iter    current;
-
-        public:
-            /* Member types ************************************************************* */
-            typedef Iter                                                iterator_type;
-            typedef typename ft::random_access_iterator_tag             iterator_category;
-            typedef typename ft::iterator_traits<Iter>::value_type      value_type;
-            typedef typename ft::iterator_traits<Iter>::difference_type difference_type;
-            typedef typename ft::iterator_traits<Iter>::pointer         pointer;
-            typedef typename ft::iterator_traits<Iter>::reference       reference;
-
-            /* Member function ********************************************************** */
-            /***** Basic *****/
-            /* Constructor */
-            vt_iterator() : current() {}
-            explicit vt_iterator(Iter x) : current(x) {}
-            template <class U>
-            vt_iterator(const vt_iterator<U> &other) : current(other.base()) {}
-            
-            /* operator= */
-            template <class U>
-            vt_iterator& operator=(const vt_iterator<U>& other) { this->current = other.base(); return (*this); }
-
-            /* base */
-            Iter base() const { return (this->current); }
-            /* operator* */
-            reference operator*() const { return (*this->current); }
-            /* operator-> */
-            pointer operator->() { return (addressof(this->operator*())); }
-            /* operator[] */
-            reference operator[](difference_type n) const { return (*(this + n)); }
-            /* operator++ */
-            vt_iterator& operator++() { ++this->current; return (*this); }
-            /* ++operator (operator++(int)) */
-            vt_iterator operator++(int)
-            {
-                vt_iterator    tmp;
-
-                tmp = *this;
-                ++current;
-                return (tmp);
-            }
-            /* operator+= */
-            vt_iterator& operator+=(difference_type n) { this->current += n; return (*this); }
-            /* operator+ */
-            vt_iterator operator+(difference_type n) const { return (vt_iterator(this->current + n)); }
-            /* operator-- */
-            vt_iterator& operator--() { --this->current; return (*this); }
-            /* --operator (operator--(int)) */
-            vt_iterator operator--(int)
-            {
-                vt_iterator    tmp;
-
-                tmp = *this;
-                --current;
-                return (tmp);
-            }
-            /* operator-= */
-            vt_iterator& operator-=(difference_type n) { this->current -= n; return (*this); }
-            /* operator- */
-            vt_iterator operator-(difference_type n) const { return (vt_iterator(this->current - n)); }
-    };
-    /* Non-Member function ****************************************************** */
-    /* operator== */
-    template <class Iter1, class Iter2>
-    bool operator==(const vt_iterator<Iter1> &lhs, const vt_iterator<Iter2> &rhs)
-    {
-        return (lhs.base() == rhs.base());
-    }
-    /* operator!= */
-    template <class Iter1, class Iter2>
-    bool operator!=(const vt_iterator<Iter1> &lhs, const vt_iterator<Iter2> &rhs)
-    {
-        return (lhs.base() != rhs.base());
-    }
-    /* operator< */
-    template <class Iter1, class Iter2>
-    bool operator<(const vt_iterator<Iter1> &lhs, const vt_iterator<Iter2> &rhs)
-    {
-        return (lhs.base() < rhs.base());
-    }
-    /* operator<= */
-    template <class Iter1, class Iter2>
-    bool operator<=(const vt_iterator<Iter1> &lhs, const vt_iterator<Iter2> &rhs)
-    {
-        return (lhs.base() <= rhs.base());
-    }
-    /* operator> */
-    template <class Iter1, class Iter2>
-    bool operator>(const vt_iterator<Iter1> &lhs, const vt_iterator<Iter2> &rhs)
-    {
-        return (lhs.base() > rhs.base());
-    }
-    /* operator>= */
-    template <class Iter1, class Iter2>
-    bool operator>=(const vt_iterator<Iter1> &lhs, const vt_iterator<Iter2> &rhs)
-    {
-        return (lhs.base() >= rhs.base());
-    }
-    /* operator+ */
-    template <class Iter>
-    vt_iterator<Iter> operator+(typename vt_iterator<Iter>::difference_type n, const vt_iterator<Iter> &it)
-    {
-        return (vt_iterator<Iter>(it.base() + n));
-    }
-    /* operator- */
-    template <class Iter1, class Iter2>
-    typename vt_iterator<Iter1>::difference_type
-    operator-(const vt_iterator<Iter1> &lhs, const vt_iterator<Iter2> &rhs)
     {
         return (rhs.base() - lhs.base());
     }

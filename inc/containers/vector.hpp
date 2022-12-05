@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 23:47:52 by root              #+#    #+#             */
-/*   Updated: 2022/12/05 19:41:03 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/12/05 21:10:51 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ namespace ft
             typedef typename allocator_type::difference_type    difference_type;
             typedef typename allocator_type::pointer            pointer;
             typedef const typename allocator_type::pointer      const_pointer;
-            typedef ft::vt_iterator<T*>                         iterator;
-            typedef const ft::vt_iterator<T*>                   const_iterator;
+            typedef pointer                                     iterator;
+            typedef const pointer                               const_iterator;
             typedef ft::reverse_iterator<iterator>              reverse_iterator;
             typedef ft::reverse_iterator<const_iterator>        const_reverse_iterator;
         
