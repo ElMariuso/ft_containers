@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 23:47:52 by root              #+#    #+#             */
-/*   Updated: 2022/12/05 13:46:55 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/12/05 14:24:04 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -252,16 +252,50 @@ namespace ft
             
         // }
 
-        // /* erase */
-        // iterator erase (iterator position)
-        // {
-            
-        // }
+        /* erase */
+        iterator erase (iterator position)
+        {
+            difference_type n;
 
-        // iterator erase (iterator first, iterator last)
-        // {
-            
-        // }
+            n = ft::distance(this->_begin, position);
+            if (n >= this->_size)
+                return (NULL);
+            else if (n == this->_size)
+            {
+                this->pop_back();
+                return (this->back());
+            }
+            for (size_t i = n; i != this->_size; i++)
+            {
+                this->_alloc.construct(this->begin + i, this->_begin + i + 1);
+                this->_alloc.destroy(this->_begin + i + 1);
+            }
+            this->_size--;
+            return (iterator(this->_begin + n));
+        }
+
+        iterator erase (iterator first, iterator last)
+        {
+            difference_type start;
+            difference_type end;
+            difference_type diff;
+
+            start = ft::distance(this->_begin, first);
+            end = ft::distance(this->_begin, last);
+            diff = ft::distance(first, end);
+            if (start >= this->_size || end >= this->_size)
+                return (NULL);
+            for (size_t j = 0; j != diff; j++)
+            {
+                for (size_t i = start; i != this->_size; i++)
+                {
+                    this->_alloc.construct(this->_begin + i, this->_begin + i + 1);
+                    this->_alloc.destroy(this->_begin + i + 1);
+                }
+                this->_size--;
+            }
+            return (iterator(this->_begin + start));
+        }
 
         /* push_back */
         void    push_back(const value_type& val)
@@ -277,7 +311,7 @@ namespace ft
         {
             if (this->_size == 0)
                 return ;
-            this->_alloc.destroy(this->end() - 1);
+            this->_alloc.destroy(this->back());
             this->_size--;
         }
 
