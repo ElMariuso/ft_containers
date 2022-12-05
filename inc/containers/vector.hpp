@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 23:47:52 by root              #+#    #+#             */
-/*   Updated: 2022/12/05 13:22:16 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/12/05 13:22:59 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -297,7 +297,7 @@ namespace ft
             if (first > last)
                 return (NULL);
             else if (first == last)
-                this->erase(first);
+                return (this->erase(first));   
             i = 0;
             j = 0;
             start = ft::distance(this->_begin, first);
