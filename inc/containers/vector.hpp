@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 23:47:52 by root              #+#    #+#             */
-/*   Updated: 2022/12/05 10:48:52 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/12/05 11:10:24 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,14 +134,14 @@ namespace ft
         /* at */
         reference at (size_type n)
         {
-            // if (n > this->_size)
-            //     throw (std::out_of_range());
+            if (n > this->_size)
+                throw (std::out_of_range("[ERROR]: OutOfRangeException"));
             return (this->_start + n);
         }
         const_reference at (size_type n) const
         {
-            // if (n > this->_size)
-            //     throw (std::out_of_range());
+            if (n > this->_size)
+                throw (std::out_of_range("[ERROR]: OutOfRangeException"));
             return (this->_start + n);
         }
         
@@ -187,8 +187,8 @@ namespace ft
         /* reserve */
         void    reserve(size_type n)
         {
-            // if (n > this->capacity())
-            //     throw (std::length_error());
+            if (n > this->capacity())
+                throw (std::length_error("[ERROR]: LengthErrorException"));
             if (n <= this->_capacity)
                 return ;
             pointer tmp = this->_alloc.allocate(n);
