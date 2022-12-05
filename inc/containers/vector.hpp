@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 23:47:52 by root              #+#    #+#             */
-/*   Updated: 2022/12/05 14:58:11 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/12/05 15:16:33 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,26 +156,26 @@ namespace ft
         {
             if (n > this->_size)
                 throw (std::out_of_range("[ERROR]: OutOfRangeException"));
-            return (this->_start + n);
+            return (this->_begin + n);
         }
         const_reference at (size_type n) const
         {
             if (n > this->_size)
                 throw (std::out_of_range("[ERROR]: OutOfRangeException"));
-            return (this->_start + n);
+            return (this->_begin + n);
         }
         
         /* operator[] */
-        reference operator[]  (size_type n) { return (this->_start + n); }
-        const_reference operator[] (size_type n) const { return (this->_start + n); }
+        reference operator[]  (size_type n) { return (this->_begin + n); }
+        const_reference operator[] (size_type n) const { return (this->_begin + n); }
 
         /* front */
-        reference front() { return (this->_start); }
-        const_reference front() const { return (this->_start); }
+        reference front() { return (this->_begin); }
+        const_reference front() const { return (this->_begin); }
 
         /* back */
-        reference back() { return (this->_start + this->_size - 1); }
-        const_reference back() const { return (this->_start + this->_size - 1); }
+        reference back() { return (this->_begin + this->_size - 1); }
+        const_reference back() const { return (this->_begin + this->_size - 1); }
 
         /***** Iterators *****/
         /* begin */
@@ -183,8 +183,8 @@ namespace ft
         const_iterator begin() const { return (this->_begin); }
 
         /* end */
-        iterator end() { return (this->_start + this->_size); }
-        const_iterator end() const { return (this->_start + this->_size); }
+        iterator end() { return (this->_begin + this->_size); }
+        const_iterator end() const { return (this->_begin + this->_size); }
 
         /* rbegin */
         reverse_iterator    rbegin() { return (reverse_iterator(this->end())); }
