@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 23:47:52 by root              #+#    #+#             */
-/*   Updated: 2022/12/05 13:20:57 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/12/05 13:22:16 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -262,7 +262,7 @@ namespace ft
             j = 0;
             n = ft::distance(this->_begin, position);
             if (n >= this->_size)
-                return ;
+                return (NULL);
             tmp = this->_alloc.allocate(this->_size - 1);
             while (i != n)
             {
@@ -282,6 +282,7 @@ namespace ft
             }
             this->_begin = tmp;
             this->_size--;
+            return (this->_begin + n);
         }
 
         iterator erase (iterator first, iterator last)
@@ -294,7 +295,7 @@ namespace ft
             pointer         tmp;
 
             if (first > last)
-                return ;
+                return (NULL);
             else if (first == last)
                 this->erase(first);
             i = 0;
@@ -303,7 +304,7 @@ namespace ft
             end = ft::distance(this->_begin, last);
             n = ft::distance(first, last);
             if (start >= this->_size || end >= this->_size)
-                return ;
+                return (NULL);
             tmp = this->_alloc.allocate(this->_size - n);
             while (i != start)
             {
@@ -326,6 +327,7 @@ namespace ft
             }
             this->_begin = tmp;
             this->_size -= n;
+            return (this->_begin + start);
         }
 
         /* push_back */
