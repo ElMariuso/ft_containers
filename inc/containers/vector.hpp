@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 23:47:52 by root              #+#    #+#             */
-/*   Updated: 2022/12/05 19:05:09 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/12/05 19:41:03 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,12 +109,17 @@ namespace ft
         /* operator= */
         vector& operator=(const vector& x)
         {
+            if (*this == x)
+                return (*this);
+            this->clear();
             this->_alloc = x._alloc;
             this->_begin = x._begin;
             this->_size = x._size;
             this->_capacity = x._capacity;
+            this->reserve(this->_size);
             for (size_t i = 0; i != this->_size; i++)
                 this->_alloc.construct(this->_begin + i, x._begin + i);
+            return (*this);
         }
 
         /* assign */
