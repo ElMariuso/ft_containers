@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 23:47:52 by root              #+#    #+#             */
-/*   Updated: 2022/12/05 13:22:59 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/12/05 13:30:26 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -242,93 +242,26 @@ namespace ft
 
         // void    insert (iterator position, size_type n, const value_type& val)
         // {
+            
         // }
 
         // template <class InputIterator>
         // void insert (iterator position, InputIterator first, InputIterator last,
         //     typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator >::type* = NULL)
-        // {          
+        // {
+            
         // }
 
-        /* erase */
-        iterator erase (iterator position)
-        {
-            int             i;
-            int             j;
-            difference_type n;
-            pointer         tmp;
+        // /* erase */
+        // iterator erase (iterator position)
+        // {
+            
+        // }
 
-            i = 0;
-            j = 0;
-            n = ft::distance(this->_begin, position);
-            if (n >= this->_size)
-                return (NULL);
-            tmp = this->_alloc.allocate(this->_size - 1);
-            while (i != n)
-            {
-                this->_alloc.construct(tmp + j, this->_begin + i);
-                this->_alloc.destroy(this->_begin + i);
-                i++;
-                j++;
-            }
-            this->_alloc.destroy(this->_begin + i);
-            i++;
-            while (i != this->_size)
-            {
-                this->_alloc.construct(tmp + j, this->_begin + i);
-                this->_alloc.destroy(this->_begin + i);
-                i++;
-                j++; 
-            }
-            this->_begin = tmp;
-            this->_size--;
-            return (this->_begin + n);
-        }
-
-        iterator erase (iterator first, iterator last)
-        {
-            int             i;
-            int             j;
-            difference_type start;
-            difference_type end;
-            difference_type n;
-            pointer         tmp;
-
-            if (first > last)
-                return (NULL);
-            else if (first == last)
-                return (this->erase(first));   
-            i = 0;
-            j = 0;
-            start = ft::distance(this->_begin, first);
-            end = ft::distance(this->_begin, last);
-            n = ft::distance(first, last);
-            if (start >= this->_size || end >= this->_size)
-                return (NULL);
-            tmp = this->_alloc.allocate(this->_size - n);
-            while (i != start)
-            {
-                this->_alloc.construct(tmp + j, this->_begin + i);
-                this->_alloc.destroy(this->_begin + i);
-                i++;
-                j++;
-            }
-            while (i != n)
-            {
-                this->_alloc.destroy(this->_begin + i);
-                i++;
-            }
-            while (i != end)
-            {
-                this->_alloc.construct(tmp + j, this->_begin + i);
-                this->_alloc.destroy(this->_begin + i);
-                i++;
-                j++;  
-            }
-            this->_begin = tmp;
-            this->_size -= n;
-            return (this->_begin + start);
-        }
+        // iterator erase (iterator first, iterator last)
+        // {
+            
+        // }
 
         /* push_back */
         void    push_back(const value_type& val)
@@ -394,16 +327,21 @@ namespace ft
     };
     /* Non-member function overloads ******************************************** */
     /* relational operators */
-    // template <class T, class Alloc>
-    // bool operator==(const vector<T, Alloc>& lhs, const vector<T, Alloc>& rhs)
-    // {
-
-    // }
+    template <class T, class Alloc>
+    bool operator==(const vector<T, Alloc>& lhs, const vector<T, Alloc>& rhs)
+    {
+        if (lhs.size() != rhs.size())
+            return (false);
+        for (size_t i = 0; i != lhs.size(); i++)
+            if (lhs[i] != rhs[i])
+                return (false);
+        return (true);
+    }
 
     // template <class T, class Alloc>
     // bool operator!=(const vector<T, Alloc>& lhs, const vector<T, Alloc>& rhs)
     // {
-
+        
     // }
 
     // template <class T, class Alloc>
