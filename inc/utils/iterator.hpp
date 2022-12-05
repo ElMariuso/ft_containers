@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 16:56:02 by mthiry            #+#    #+#             */
-/*   Updated: 2022/12/05 18:14:59 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/12/05 18:53:28 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,14 +64,14 @@ namespace ft
     };
     /* advance ****************************************************************** */
     template <class InputIt>
-    void    advance(InputIt &i, typename iterator_traits<InputIt>::difference_type n, input_iterator_tag)
+    void    advance(InputIt &i, typename iterator_traits<InputIt>::difference_type n, ft::input_iterator_tag)
     {
         for (; n > 0; --n)
             ++i;
     }
 
     template <class BiDirIt>
-    void    advance(BiDirIt &i, typename iterator_traits<BiDirIt>::difference_type n, bidirectional_iterator_tag)
+    void    advance(BiDirIt &i, typename iterator_traits<BiDirIt>::difference_type n, ft::bidirectional_iterator_tag)
     {
         if (n >= 0)
             for (; n > 0; --n)
@@ -82,14 +82,14 @@ namespace ft
     }
 
     template <class RandIt>
-    void    advance(RandIt &i, typename iterator_traits<RandIt>::difference_type n, random_access_iterator_tag)
+    void    advance(RandIt &i, typename iterator_traits<RandIt>::difference_type n, ft::random_access_iterator_tag)
     {
         i += n;
     }
 
     /* distance ***************************************************************** */
     template <class InputIt>
-    typename iterator_traits<InputIt>::difference_type  _distance(InputIt first, InputIt last, input_iterator_tag)
+    typename ft::iterator_traits<InputIt>::difference_type  _distance(InputIt first, InputIt last, ft::input_iterator_tag)
     {
         typename iterator_traits<InputIt>::difference_type  r;
         for (; first != last; ++first)
@@ -98,13 +98,13 @@ namespace ft
     }
 
     template <class RandIt>
-    typename iterator_traits<RandIt>::difference_type  _distance(RandIt first, RandIt last, random_access_iterator_tag)
+    typename ft::iterator_traits<RandIt>::difference_type  _distance(RandIt first, RandIt last, ft::random_access_iterator_tag)
     {
         return (last - first);
     }
 
     template <class InputIt>
-    typename iterator_traits<InputIt>::difference_type  distance(InputIt first, InputIt last)
+    typename ft::iterator_traits<InputIt>::difference_type  distance(InputIt first, InputIt last)
     {
         return (_distance(first, last, typename ft::iterator_traits<InputIt>::iterator_category()));
     }
@@ -112,9 +112,9 @@ namespace ft
     /* reverse_iterator ********************************************************* */
     template <class Iter>
     class reverse_iterator :
-        public iterator<typename iterator_traits<Iter>::iterator_category, typename iterator_traits<Iter>::value_type,
-                        typename iterator_traits<Iter>::difference_type, typename iterator_traits<Iter>::pointer,
-                        typename iterator_traits<Iter>::reference>
+        public ft::iterator<typename ft::iterator_traits<Iter>::iterator_category, typename ft::iterator_traits<Iter>::value_type,
+                        typename ft::iterator_traits<Iter>::difference_type, typename ft::iterator_traits<Iter>::pointer,
+                        typename ft::iterator_traits<Iter>::reference>
     {
         private:
             Iter    t; /* Not used */
@@ -242,9 +242,9 @@ namespace ft
     /* vt_iterator ************************************************************** */
     template <class Iter>
     class vt_iterator :
-        public iterator<typename iterator_traits<Iter>::iterator_category, typename iterator_traits<Iter>::value_type,
-                        typename iterator_traits<Iter>::difference_type, typename iterator_traits<Iter>::pointer,
-                        typename iterator_traits<Iter>::reference>
+        public ft::iterator<typename ft::iterator_traits<Iter>::iterator_category, typename ft::iterator_traits<Iter>::value_type,
+                        typename ft::iterator_traits<Iter>::difference_type, typename ft::iterator_traits<Iter>::pointer,
+                        typename ft::iterator_traits<Iter>::reference>
     {       
         protected:
             Iter    current;
@@ -253,10 +253,10 @@ namespace ft
             /* Member types ************************************************************* */
             typedef Iter                                                iterator_type;
             typedef typename ft::random_access_iterator_tag             iterator_category;
-            typedef typename iterator_traits<Iter>::value_type          value_type;
-            typedef typename iterator_traits<Iter>::difference_type     difference_type;
-            typedef typename iterator_traits<Iter>::pointer             pointer;
-            typedef typename iterator_traits<Iter>::reference           reference;
+            typedef typename ft::iterator_traits<Iter>::value_type      value_type;
+            typedef typename ft::iterator_traits<Iter>::difference_type difference_type;
+            typedef typename ft::iterator_traits<Iter>::pointer         pointer;
+            typedef typename ft::iterator_traits<Iter>::reference       reference;
 
             /* Member function ********************************************************** */
             /***** Basic *****/
