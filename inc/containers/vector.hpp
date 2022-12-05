@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 23:47:52 by root              #+#    #+#             */
-/*   Updated: 2022/12/05 18:44:31 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/12/05 19:05:09 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ namespace ft
             typedef typename allocator_type::pointer            pointer;
             typedef const typename allocator_type::pointer      const_pointer;
             typedef ft::vt_iterator<T*>                         iterator;
-            typedef ft::vt_iterator<const T*>                   const_iterator;
+            typedef const ft::vt_iterator<T*>                   const_iterator;
             typedef ft::reverse_iterator<iterator>              reverse_iterator;
             typedef ft::reverse_iterator<const_iterator>        const_reverse_iterator;
         
@@ -91,7 +91,7 @@ namespace ft
                 this->_alloc.construct(this->begin + i, *first);
         }
 
-        vector(const vector &x): _alloc(x._alloc), _begin(_alloc.allocate(x._size)),
+        vector(const vector &x): _alloc(x._alloc), _begin(this->_alloc.allocate(x._size)),
             _size(x._size), _capacity(x._capacity)
         {
             for (size_t i = 0; i != this->_size; i++)
