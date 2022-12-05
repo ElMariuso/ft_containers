@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 16:56:02 by mthiry            #+#    #+#             */
-/*   Updated: 2022/12/05 17:29:50 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/12/05 18:14:59 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ namespace ft
 
     /* distance ***************************************************************** */
     template <class InputIt>
-    typename iterator_traits<InputIt>::difference_type  distance(InputIt first, InputIt last, input_iterator_tag)
+    typename iterator_traits<InputIt>::difference_type  _distance(InputIt first, InputIt last, input_iterator_tag)
     {
         typename iterator_traits<InputIt>::difference_type  r;
         for (; first != last; ++first)
@@ -98,9 +98,15 @@ namespace ft
     }
 
     template <class RandIt>
-    typename iterator_traits<RandIt>::difference_type  distance(RandIt first, RandIt last, random_access_iterator_tag)
+    typename iterator_traits<RandIt>::difference_type  _distance(RandIt first, RandIt last, random_access_iterator_tag)
     {
         return (last - first);
+    }
+
+    template <class InputIt>
+    typename iterator_traits<InputIt>::difference_type  distance(InputIt first, InputIt last)
+    {
+        return (_distance(first, last, typename ft::iterator_traits<InputIt>::iterator_category()));
     }
 
     /* reverse_iterator ********************************************************* */
@@ -246,7 +252,7 @@ namespace ft
         public:
             /* Member types ************************************************************* */
             typedef Iter                                                iterator_type;
-            typedef typename iterator_traits<Iter>::iterator_category   iterator_category;
+            typedef typename ft::random_access_iterator_tag             iterator_category;
             typedef typename iterator_traits<Iter>::value_type          value_type;
             typedef typename iterator_traits<Iter>::difference_type     difference_type;
             typedef typename iterator_traits<Iter>::pointer             pointer;

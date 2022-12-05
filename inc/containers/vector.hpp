@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 23:47:52 by root              #+#    #+#             */
-/*   Updated: 2022/12/05 17:31:24 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/12/05 18:44:31 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <stdexcept>
 
 # include <iterator>
+# include <vector>
 
 /* Includes.h *************************************************************** */
 
@@ -36,18 +37,18 @@ namespace ft
     {
         /* Member types ************************************************************* */
         public:
-            typedef T                                                           value_type;
-            typedef Alloc                                                       allocator_type;
-            typedef value_type&                                                 reference;
-            typedef const value_type&                                           const_reference;
-            typedef typename allocator_type::size_type                          size_type;
-            typedef typename allocator_type::difference_type                    difference_type;
-            typedef typename allocator_type::pointer                            pointer;
-            typedef const typename allocator_type::pointer                      const_pointer;
-            typedef ft::vt_iterator<T*>                                         iterator;
-            typedef ft::vt_iterator<const T*>                                   const_iterator;
-            typedef ft::reverse_iterator<iterator>                              reverse_iterator;
-            typedef ft::reverse_iterator<const_iterator>                        const_reverse_iterator;
+            typedef T                                           value_type;
+            typedef Alloc                                       allocator_type;
+            typedef typename allocator_type::reference          reference;
+            typedef const typename allocator_type::reference    const_reference;
+            typedef typename allocator_type::size_type          size_type;
+            typedef typename allocator_type::difference_type    difference_type;
+            typedef typename allocator_type::pointer            pointer;
+            typedef const typename allocator_type::pointer      const_pointer;
+            typedef ft::vt_iterator<T*>                         iterator;
+            typedef ft::vt_iterator<const T*>                   const_iterator;
+            typedef ft::reverse_iterator<iterator>              reverse_iterator;
+            typedef ft::reverse_iterator<const_iterator>        const_reverse_iterator;
         
         /* Attributes *************************************************************** */
         private:
@@ -60,8 +61,6 @@ namespace ft
         /* Member functions ********************************************************* */
         /***** Basic *****/
         /* Constructor */
-        vector(): _alloc(Alloc()), _begin(NULL), _size(0), _capacity(0) {}
-
         explicit vector(const allocator_type &alloc = allocator_type())
             : _alloc(alloc), _begin(NULL), _size(0), _capacity(0) { }
 
@@ -104,7 +103,7 @@ namespace ft
         {
             for (size_t i = 0; i < this->_size; i++)
                 this->_alloc.destroy(this->_begin + i);
-            this->_alloc.deallocate(this->_begin, this->_count);
+            this->_alloc.deallocate(this->_begin, this->_capacity);
         }
 
         /* operator= */
@@ -168,25 +167,25 @@ namespace ft
         }
         
         /* operator[] */
-        reference operator[]  (size_type n) { return (this->_begin + n); }
-        const_reference operator[] (size_type n) const { return (this->_begin + n); }
+        reference operator[]  (size_type n) { return (*(this->_begin + n)); }
+        const_reference operator[] (size_type n) const { return (*(this->_begin + n)); }
 
         /* front */
-        reference front() { return (this->_begin); }
-        const_reference front() const { return (this->_begin); }
+        reference front() { return (*(this->_begin)); }
+        const_reference front() const { return (*(this->_begin)); }
 
         /* back */
-        reference back() { return (this->_begin + this->_size - 1); }
-        const_reference back() const { return (this->_begin + this->_size - 1); }
+        reference back() { return (*(this->_begin + this->_size - 1)); }
+        const_reference back() const { return (*(this->_begin + this->_size - 1)); }
 
         /***** Iterators *****/
         /* begin */
-        iterator begin() { return (this->_begin); }
-        const_iterator begin() const { return (this->_begin); }
+        iterator begin() { return (iterator(this->_begin)); }
+        const_iterator begin() const { return (const_iterator(this->_begin)); }
 
         /* end */
-        iterator end() { return (this->_begin + this->_size); }
-        const_iterator end() const { return (this->_begin + this->_size); }
+        iterator end() { return (iterator(this->_begin + this->_size)); }
+        const_iterator end() const { return (const_iterator(this->_begin + this->_size)); }
 
         /* rbegin */
         reverse_iterator    rbegin() { return (reverse_iterator(this->end())); }
@@ -209,8 +208,6 @@ namespace ft
         /* reserve */
         void    reserve(size_type n)
         {
-            if (n > this->capacity())
-                throw (std::length_error("[ERROR]: LengthErrorException"));
             if (n <= this->_capacity)
                 return ;
             pointer tmp = this->_alloc.allocate(n);

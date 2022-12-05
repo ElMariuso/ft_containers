@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 20:44:16 by root              #+#    #+#             */
-/*   Updated: 2022/12/05 13:43:19 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/12/05 18:19:53 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ namespace ft
     }
     /* lexicographical_compare ************************************************** */
     template <class InputIt1, class InputIt2, class Compare>
-    bool lexicographical_compare(InputIt1 first1, InputIt1 last1, InputIt2 first2, InputIt2 last2, Compare comp)
+    bool _lexicographical_compare(InputIt1 first1, InputIt1 last1, InputIt2 first2, InputIt2 last2, Compare comp)
     {
         for (; first2 != last2; ++first1, (void) ++first2)
         {
@@ -108,8 +108,7 @@ namespace ft
     template <class InputIt1, class InputIt2>
     bool lexicographical_compare(InputIt1 first1, InputIt1 last1, InputIt2 first2, InputIt2 last2)
     {
-        return (lexicographical_compare(first1, last1, first2, last2,
-        less<typename ft::iterator_traits<InputIt1>::value_type,
+        return (_lexicographical_compare(first1, last1, first2, last2, less<typename ft::iterator_traits<InputIt1>::value_type,
             typename ft::iterator_traits<InputIt2>::value_type>()));
     }
 }
