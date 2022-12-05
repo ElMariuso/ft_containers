@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 23:47:52 by root              #+#    #+#             */
-/*   Updated: 2022/12/05 23:14:49 by root             ###   ########.fr       */
+/*   Updated: 2022/12/05 23:59:28 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ namespace ft
             _size(x._size), _capacity(x._capacity)
         {
             for (size_t i = 0; i != this->_size; i++)
-                this->_alloc.construct(this->_begin + i, x._begin + i);
+                this->_alloc.construct(this->_begin + i, *(x._begin + i));
         }
 
         /* Destructor */
@@ -115,7 +115,7 @@ namespace ft
             this->_capacity = x._capacity;
             this->reserve(this->_size);
             for (size_t i = 0; i != this->_size; i++)
-                this->_alloc.construct(this->_begin + i, x._begin + i);
+                this->_alloc.construct(this->_begin + i, *(x._begin + i));
             return (*this);
         }
 
@@ -134,7 +134,7 @@ namespace ft
             }
             this->clear();
             for (size_t i = 0; i != n; i++)
-                this->_alloc.construct(this->_begin + i, first + i);
+                this->_alloc.construct(this->_begin + i, *(first + i));
             this->_size = n;
         }
         void    assign(size_type n, const value_type& val)
@@ -260,7 +260,7 @@ namespace ft
             }
             for (size_t j = this->_size; j >= 1 && j >= i; j--)
             {
-                this->_alloc.construct(this->_begin + j - 1, this->_begin + i + ii);
+                this->_alloc.construct(this->_begin + j - 1, *(this->_begin + i + ii));
                 this->_alloc.destroy(this->_begin + i + ii);
                 ii++;
             }
@@ -291,12 +291,12 @@ namespace ft
             }
             for (size_t j = this->_size; j >= 1 && j >= i; j--)
             {
-                this->_alloc.construct(this->_begin + j - 1, this->_begin + i + ii);
+                this->_alloc.construct(this->_begin + j - 1, *(this->_begin + i + ii));
                 this->_alloc.destroy(this->_begin + i + ii);
                 ii++;
             }
             for (size_t j = 0; j < n; j++)
-                this->_alloc.construct(this->_begin + i + j, first + j);
+                this->_alloc.construct(this->_begin + i + j, *(first + j));
             this->_size += n;
         }
 
@@ -315,7 +315,7 @@ namespace ft
             }
             for (size_t i = n; i != this->_size; i++)
             {
-                this->_alloc.construct(this->_begin + i, this->_begin + i + 1);
+                this->_alloc.construct(this->_begin + i, *(this->_begin + i + 1));
                 this->_alloc.destroy(this->_begin + i + 1);
             }
             this->_size--;
@@ -337,7 +337,7 @@ namespace ft
             {
                 for (size_t i = start; i != this->_size; i++)
                 {
-                    this->_alloc.construct(this->_begin + i, this->_begin + i + 1);
+                    this->_alloc.construct(this->_begin + i, *(this->_begin + i + 1));
                     this->_alloc.destroy(this->_begin + i + 1);
                 }
                 this->_size--;
