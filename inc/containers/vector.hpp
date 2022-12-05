@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 23:47:52 by root              #+#    #+#             */
-/*   Updated: 2022/12/05 11:10:24 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/12/05 11:18:01 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,16 +116,24 @@ namespace ft
                 this->_alloc.construct(this->_begin + i, x[i]);
         }
 
-        // /* assign */
-        // template <class InputIterator> 
-        // void assign (InputIterator first, InputIterator last)
-        // {
+        /* assign */
+        template <class InputIterator> 
+        void assign (InputIterator first, InputIterator last)
+        {
             
-        // }
-        // void    assign(size_type n, const value_type& val)
-        // {
-            
-        // }
+        }
+        void    assign(size_type n, const value_type& val)
+        {
+            if (n > this->_capacity)
+            {
+                this->reserve(n);
+                this->_capacity = n;
+            }
+            this->clear();
+            for (size_t i = 0; i != n; i++)
+                this->_alloc.construct(this->_begin + i, val);
+            this->_size = n;
+        }
 
         /* get_allocator */
         allocator_type get_allocator() const { return (this->_alloc); }
