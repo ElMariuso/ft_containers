@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 20:44:16 by root              #+#    #+#             */
-/*   Updated: 2022/12/05 18:19:53 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/12/05 18:54:05 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ namespace ft
     {
         typedef typename ft::iterator_traits<InputIt1>::value_type  v1;
         typedef typename ft::iterator_traits<InputIt2>::value_type  v2;
-        return (equal(first1, last1, first2, equal_to<v1, v2>()));
+        return (equal(first1, last1, first2, ft::equal_to<v1, v2>()));
     }
     /* lexicographical_compare ************************************************** */
     template <class InputIt1, class InputIt2, class Compare>
@@ -108,7 +108,7 @@ namespace ft
     template <class InputIt1, class InputIt2>
     bool lexicographical_compare(InputIt1 first1, InputIt1 last1, InputIt2 first2, InputIt2 last2)
     {
-        return (_lexicographical_compare(first1, last1, first2, last2, less<typename ft::iterator_traits<InputIt1>::value_type,
+        return (ft::_lexicographical_compare(first1, last1, first2, last2, less<typename ft::iterator_traits<InputIt1>::value_type,
             typename ft::iterator_traits<InputIt2>::value_type>()));
     }
 }
