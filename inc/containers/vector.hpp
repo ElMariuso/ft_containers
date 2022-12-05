@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 23:47:52 by root              #+#    #+#             */
-/*   Updated: 2022/12/05 15:16:33 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/12/05 17:31:24 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 
 # include <memory>
 # include <stdexcept>
+
+# include <iterator>
 
 /* Includes.h *************************************************************** */
 
@@ -39,11 +41,11 @@ namespace ft
             typedef value_type&                                                 reference;
             typedef const value_type&                                           const_reference;
             typedef typename allocator_type::size_type                          size_type;
-            typedef typename ft::iterator_traits<value_type>::difference_type   difference_type;
-            typedef typename ft::iterator_traits<value_type>::pointer           pointer;
-            typedef const typename ft::iterator_traits<value_type>::pointer     const_pointer;
-            typedef pointer                                                     iterator;
-            typedef const_pointer                                               const_iterator;
+            typedef typename allocator_type::difference_type                    difference_type;
+            typedef typename allocator_type::pointer                            pointer;
+            typedef const typename allocator_type::pointer                      const_pointer;
+            typedef ft::vt_iterator<T*>                                         iterator;
+            typedef ft::vt_iterator<const T*>                                   const_iterator;
             typedef ft::reverse_iterator<iterator>                              reverse_iterator;
             typedef ft::reverse_iterator<const_iterator>                        const_reverse_iterator;
         
@@ -77,7 +79,7 @@ namespace ft
         template <class InputIterator>
         vector(InputIterator first, InputIterator last,
             const allocator_type &alloc = allocator_type(),
-            typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL)
+            typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = 0)
         {
             difference_type n;
 
@@ -94,7 +96,7 @@ namespace ft
             _size(x._size), _capacity(x._capacity)
         {
             for (size_t i = 0; i != this->_size; i++)
-                this->_alloc.construct(this->_begin + i, x[i]);
+                this->_alloc.construct(this->_begin + i, x._begin + i);
         }
 
         /* Destructor */
@@ -113,13 +115,13 @@ namespace ft
             this->_size = x._size;
             this->_capacity = x._capacity;
             for (size_t i = 0; i != this->_size; i++)
-                this->_alloc.construct(this->_begin + i, x[i]);
+                this->_alloc.construct(this->_begin + i, x._begin + i);
         }
 
         /* assign */
         template <class InputIterator> 
         void assign (InputIterator first, InputIterator last,
-            typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator >::type* = NULL)
+            typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator >::type* = 0)
         {
             difference_type n;
 
@@ -230,7 +232,7 @@ namespace ft
         void    clear()
         {
             for (size_t i = 0; i != this->_size; i++)
-                this->_alloc.destroy(this->_begin + i);    
+                this->_alloc.destroy(this->_begin + i);
             this->_size = 0;
         }
 
@@ -270,7 +272,7 @@ namespace ft
 
         template <class InputIterator>
         void insert (iterator position, InputIterator first, InputIterator last,
-            typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator >::type* = NULL)
+            typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator >::type* = 0)
         {
             iterator        tmp;
             difference_type n;
