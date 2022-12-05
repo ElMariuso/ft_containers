@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 23:47:52 by root              #+#    #+#             */
-/*   Updated: 2022/12/05 11:30:29 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/12/05 12:08:27 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,8 @@ namespace ft
 
         /* assign */
         template <class InputIterator> 
-        void assign (InputIterator first, InputIterator last)
+        void assign (InputIterator first, InputIterator last,
+            typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator >::type* = NULL)
         {
             difference_type n;
 
@@ -236,7 +237,7 @@ namespace ft
         // /* insert */
         // iterator insert (iterator position, const value_type& val)
         // {
-
+            
         // }
 
         // void    insert (iterator position, size_type n, const value_type& val)
@@ -253,17 +254,11 @@ namespace ft
         // /* erase */
         // iterator erase (iterator position)
         // {
-        //     iterator ret;
-            
-        //     ret = position;
-        //     ret++;
-        //     this->_alloc.destroy(position);
-        //     return (ret);
         // }
 
         // iterator erase (iterator first, iterator last)
         // {
-
+            
         // }
 
         /* push_back */
@@ -280,7 +275,7 @@ namespace ft
         {
             if (this->_size == 0)
                 return ;
-            this->_alloc.destroy(this->_begin + this->_size - 1);
+            this->_alloc.destroy(this->end() - 1);
             this->_size--;
         }
 
