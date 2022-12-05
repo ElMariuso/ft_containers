@@ -1,0 +1,27 @@
+{
+    "files.associations": {
+        "initializer_list": "cpp",
+        "iterator": "cpp",
+        "memory": "cpp",
+        "bitset": "cpp",
+        "string": "cpp",
+        "string_view": "cpp",
+        "stdexcept": "cpp",
+        "__bit_reference": "cpp",
+        "type_traits": "cpp",
+        "utility": "cpp",
+        "vector": "cpp",
+        "algorithm": "cpp",
+        "bit": "cpp",
+        "cstdlib": "cpp",
+        "ctime": "cpp",
+        "cwchar": "cpp",
+        "functional": "cpp",
+        "chrono": "cpp",
+        "__split_buffer": "cpp",
+        "__config": "cpp",
+        "__functional_03": "cpp",
+        "atomic": "cpp",
+        "iostream": "cpp"
+    }
+}
