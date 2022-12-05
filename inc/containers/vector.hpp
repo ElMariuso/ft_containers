@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 23:47:52 by root              #+#    #+#             */
-/*   Updated: 2022/12/05 12:08:27 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/12/05 13:20:57 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -242,24 +242,91 @@ namespace ft
 
         // void    insert (iterator position, size_type n, const value_type& val)
         // {
-            
         // }
 
         // template <class InputIterator>
-        // void insert (iterator position, InputIterator first, InputIterator last)
-        // {
-            
+        // void insert (iterator position, InputIterator first, InputIterator last,
+        //     typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator >::type* = NULL)
+        // {          
         // }
 
-        // /* erase */
-        // iterator erase (iterator position)
-        // {
-        // }
+        /* erase */
+        iterator erase (iterator position)
+        {
+            int             i;
+            int             j;
+            difference_type n;
+            pointer         tmp;
 
-        // iterator erase (iterator first, iterator last)
-        // {
-            
-        // }
+            i = 0;
+            j = 0;
+            n = ft::distance(this->_begin, position);
+            if (n >= this->_size)
+                return ;
+            tmp = this->_alloc.allocate(this->_size - 1);
+            while (i != n)
+            {
+                this->_alloc.construct(tmp + j, this->_begin + i);
+                this->_alloc.destroy(this->_begin + i);
+                i++;
+                j++;
+            }
+            this->_alloc.destroy(this->_begin + i);
+            i++;
+            while (i != this->_size)
+            {
+                this->_alloc.construct(tmp + j, this->_begin + i);
+                this->_alloc.destroy(this->_begin + i);
+                i++;
+                j++; 
+            }
+            this->_begin = tmp;
+            this->_size--;
+        }
+
+        iterator erase (iterator first, iterator last)
+        {
+            int             i;
+            int             j;
+            difference_type start;
+            difference_type end;
+            difference_type n;
+            pointer         tmp;
+
+            if (first > last)
+                return ;
+            else if (first == last)
+                this->erase(first);
+            i = 0;
+            j = 0;
+            start = ft::distance(this->_begin, first);
+            end = ft::distance(this->_begin, last);
+            n = ft::distance(first, last);
+            if (start >= this->_size || end >= this->_size)
+                return ;
+            tmp = this->_alloc.allocate(this->_size - n);
+            while (i != start)
+            {
+                this->_alloc.construct(tmp + j, this->_begin + i);
+                this->_alloc.destroy(this->_begin + i);
+                i++;
+                j++;
+            }
+            while (i != n)
+            {
+                this->_alloc.destroy(this->_begin + i);
+                i++;
+            }
+            while (i != end)
+            {
+                this->_alloc.construct(tmp + j, this->_begin + i);
+                this->_alloc.destroy(this->_begin + i);
+                i++;
+                j++;  
+            }
+            this->_begin = tmp;
+            this->_size -= n;
+        }
 
         /* push_back */
         void    push_back(const value_type& val)
