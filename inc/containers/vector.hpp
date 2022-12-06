@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 23:47:52 by root              #+#    #+#             */
-/*   Updated: 2022/12/06 18:53:11 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/12/06 19:54:57 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -238,69 +238,39 @@ namespace ft
         /* insert */
         iterator insert (iterator position, const value_type& val)
         {
-            this->insert(position, 1, val);
-            return (position++);
-        }
-
-        void    insert (iterator position, size_type n, const value_type& val)
-        {
             iterator    tmp;
-            size_type   i;
-            size_type   ii;
+            size_type   index;
 
             tmp = iterator(this->_begin);
-            if (n > this->max_size())
-                throw (std::length_error("vector"));
-            if (this->_size + n >= this->_capacity)
-                this->reserve(this->_size + n);
-            i = 0;
-            ii = 0;
+            this->resize(this->_size + 1);
+            this->_alloc.destroy(&this->back());
+            this->_size++;
+            index = 0;
             while (tmp != position)
             {
                 ++tmp;
-                ++i;
+                ++index;
             }
-            for (size_t j = this->_size; j >= 1 && j >= i; j--)
+            for (size_type i = this->_size; i > index; i--)
             {
-                this->_alloc.construct(this->_begin + j - 1, *(this->_begin + i + ii));
-                this->_alloc.destroy(this->_begin + i + ii);
-                ii++;
+                this->_alloc.construct(this->_begin + i, this->_begin[i - 1]);
+                this->_alloc.destroy(this->_begin + i - 1);
             }
-            for (size_t j = 0; j < n; j++)
-                this->_alloc.construct(this->_begin + i + j, val);
-            this->_size += n;
+            this->_alloc.construct(this->_begin + index, val);
+            return (iterator(this->_begin + index));
         }
 
-        template <class InputIterator>
-        void insert (iterator position, InputIterator first, InputIterator last,
-            typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator >::type* = 0)
-        {
-            iterator        tmp;
-            difference_type n;
-            size_type       i;
-            size_type       ii;
+        // void    insert (iterator position, size_type n, const value_type& val)
+        // {
+            
+        // }
 
-            tmp = iterator(this->_begin);
-            n = last - first;
-            if (this->_size + n >= this->_capacity)
-                this->reserve(this->_size + n);
-            i = 0;
-            ii = 0;
-            while (tmp != position)
-            {
-                ++tmp;
-                ++i;
-            }
-            for (size_t j = this->_size; j >= 1 && j >= i; j--)
-            {
-                this->_alloc.construct(this->_begin + j - 1, *(this->_begin + i + ii));
-                this->_alloc.destroy(this->_begin + i + ii);
-                ii++;
-            }
-            for (size_t j = 0; j < n; j++)
-                this->_alloc.construct(this->_begin + i + j, *(first + j));
-            this->_size += n;
-        }
+        // template <class InputIterator>
+        // void insert (iterator position, InputIterator first, InputIterator last,
+        //     typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator >::type* = 0)
+        // {
+            
+        // }
 
         /* erase */
         iterator erase (iterator position)
