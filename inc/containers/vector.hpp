@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 23:47:52 by root              #+#    #+#             */
-/*   Updated: 2022/12/05 23:59:28 by root             ###   ########.fr       */
+/*   Updated: 2022/12/06 17:30:17 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 
 # include <memory>
 # include <stdexcept>
+# include <iostream>
 
-# include <iterator>
 # include <vector>
 
 /* Includes.h *************************************************************** */
@@ -45,8 +45,8 @@ namespace ft
             typedef typename allocator_type::difference_type    difference_type;
             typedef typename allocator_type::pointer            pointer;
             typedef typename allocator_type::const_pointer      const_pointer;
-            typedef pointer                                     iterator;
-            typedef const_pointer                               const_iterator;
+            typedef ft::vt_iterator<pointer>                    iterator;
+            typedef ft::vt_iterator<const_pointer>              const_iterator;
             typedef ft::reverse_iterator<iterator>              reverse_iterator;
             typedef ft::reverse_iterator<const_iterator>        const_reverse_iterator;
         
@@ -64,42 +64,40 @@ namespace ft
         explicit vector(const allocator_type &alloc = allocator_type())
             : _alloc(alloc), _begin(NULL), _size(0), _capacity(0) { }
 
-        explicit vector(size_type n, const value_type &val = value_type(),
-            const allocator_type &alloc = allocator_type())
-            : _alloc(alloc), _begin(this->_alloc.allocate(n)), _size(n), _capacity(n)
+        explicit vector(size_type n, const value_type &val = value_type(), const allocator_type &alloc = allocator_type())
+            : _alloc(alloc), _size(n), _capacity(n)
         {
-            for (size_t i = 0; i != n; i++)
+            this->_begin = this->_alloc.allocate(n);
+            for (size_type i = 0; i != n; i++)
                 this->_alloc.construct(this->_begin + i, val);
         }
 
         template <class InputIterator>
-        vector(InputIterator first, InputIterator last,
-            const allocator_type &alloc = allocator_type(),
+        vector(InputIterator first, InputIterator last, const allocator_type &alloc = allocator_type(),
             typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = 0)
         {
             difference_type n;
-
-            n = ft::distance(first, last);
+            
+            n = last - first;
             this->_alloc = alloc;
             this->_begin = this->_alloc.allocate(n);
             this->_size = n;
             this->_capacity = n;
-            for (size_t i = 0; first != last; ++first, ++i)
-                this->_alloc.construct(this->begin + i, *first);
+            for (size_type i = 0; i != n; i++)
+                this->_alloc.construct(this->_begin + i, *(first + i));
         }
 
-        vector(const vector &x): _alloc(x._alloc), _begin(this->_alloc.allocate(x._size)),
-            _size(x._size), _capacity(x._capacity)
+        vector(const vector &x): _alloc(x._alloc), _size(x._size), _capacity(x._capacity)
         {
-            for (size_t i = 0; i != this->_size; i++)
-                this->_alloc.construct(this->_begin + i, *(x._begin + i));
+            this->_begin = this->_alloc.allocate(this->_size);
+            for (size_type i = 0; i != this->_size; i++)
+                this->_alloc.construct(this->_begin + i, x[i]);
         }
 
         /* Destructor */
         virtual ~vector()
         {
-            for (size_t i = 0; i < this->_size; i++)
-                this->_alloc.destroy(this->_begin + i);
+            this->clear();
             this->_alloc.deallocate(this->_begin, this->_capacity);
         }
 
@@ -110,12 +108,10 @@ namespace ft
                 return (*this);
             this->clear();
             this->_alloc = x._alloc;
-            this->_begin = x._begin;
             this->_size = x._size;
-            this->_capacity = x._capacity;
             this->reserve(this->_size);
             for (size_t i = 0; i != this->_size; i++)
-                this->_alloc.construct(this->_begin + i, *(x._begin + i));
+                this->_alloc.construct(this->_begin + i, x[i]);
             return (*this);
         }
 
@@ -126,7 +122,7 @@ namespace ft
         {
             difference_type n;
 
-            n = ft::distance(first, last);
+            n = last - first;
             if (n > this->_capacity)
             {
                 this->reserve(n);
@@ -159,13 +155,13 @@ namespace ft
         {
             if (n > this->_size)
                 throw (std::out_of_range("[ERROR]: OutOfRangeException"));
-            return (this->_begin + n);
+            return (this->_begin[n]);
         }
         const_reference at (size_type n) const
         {
             if (n > this->_size)
                 throw (std::out_of_range("[ERROR]: OutOfRangeException"));
-            return (this->_begin + n);
+            return (this->_begin[n]);
         }
         
         /* operator[] */
@@ -191,11 +187,11 @@ namespace ft
 
         /* rbegin */
         reverse_iterator    rbegin() { return (reverse_iterator(this->end())); }
-        const_reverse_iterator rbegin() const { return (reverse_iterator(this->end())); }
+        const_reverse_iterator rbegin() const { return (const_reverse_iterator(this->end())); }
 
         /* rend */
         reverse_iterator    rend() { return (reverse_iterator(this->begin())); }
-        const_reverse_iterator  rend() const { return (reverse_iterator(this->begin())); }
+        const_reverse_iterator  rend() const { return (const_reverse_iterator(this->begin())); }
 
         /***** Capacity *****/
         /* empty */
@@ -279,7 +275,7 @@ namespace ft
             size_type       ii;
 
             tmp = this->_begin;
-            n = ft::distance(first, last);
+            n = last - first;
             if (this->_size + n >= this->_capacity)
                 this->reserve(this->_size + n);
             i = 0;
@@ -305,13 +301,13 @@ namespace ft
         {
             difference_type n;
 
-            n = ft::distance(this->_begin, position);
+            n = position - this->_begin;
             if (n >= this->_size)
                 return (NULL);
             else if (n == this->_size)
             {
                 this->pop_back();
-                return (this->back());
+                return (this->_begin + this->_size - 1);
             }
             for (size_t i = n; i != this->_size; i++)
             {
@@ -328,9 +324,9 @@ namespace ft
             difference_type end;
             difference_type diff;
 
-            start = ft::distance(this->_begin, first);
-            end = ft::distance(this->_begin, last);
-            diff = ft::distance(first, end);
+            start = first - this->_begin;
+            end = last - this->_begin;
+            diff = last - first;
             if (start >= this->_size || end >= this->_size)
                 return (NULL);
             for (size_t j = 0; j != diff; j++)
@@ -351,7 +347,7 @@ namespace ft
             if (this->_size == this->_capacity)
                 this->reserve(this->_size + 1);
             this->_size++;
-            this->back() = val;
+            this->_alloc.construct(this->_begin + this->_size - 1, val);
         }
 
         /* pop_back */
@@ -359,7 +355,7 @@ namespace ft
         {
             if (this->_size == 0)
                 return ;
-            this->_alloc.destroy(this->back());
+            this->_alloc.destroy(&this->back());
             this->_size--;
         }
 
