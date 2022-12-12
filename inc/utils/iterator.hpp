@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 16:56:02 by mthiry            #+#    #+#             */
-/*   Updated: 2022/12/06 16:55:41 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/12/12 15:00:29 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 
 # include <cstddef>
 # include <memory>
+
+# include <iterator>
 
 /* Includes.h *************************************************************** */
 
@@ -60,7 +62,16 @@ namespace ft
         typedef Pointer    pointer;
         typedef Reference  reference;
     };
-
+    /* distance ***************************************************************** */
+    template <class InputIter>
+    typename ft::iterator_traits<InputIter>::difference_type
+    distance(InputIter first, InputIter last)
+    {
+        typename ft::iterator_traits<InputIter>::difference_type r(0);
+        for (; first != last; ++first)
+            ++r;
+        return (r);
+    }
     /* reverse_iterator ********************************************************* */
     template <class Iter>
     class reverse_iterator :
