@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 23:47:46 by root              #+#    #+#             */
-/*   Updated: 2022/12/13 19:01:37 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/12/13 21:03:50 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,25 @@
 
 namespace ft
 {
-    template <class Key, class T, class Compare = std::less<Key>, class Allocator = std::allocator<ft::pair<const Key, T>> >
+    template <class Key, class T, class Compare = ft::less<Key>, class Allocator = std::allocator<ft::pair<const Key, T>> >
     class map
     {
         /* Member types ************************************************************* */
         public:
+        typedef Key                                     key_type;
+        typedef T                                       mapped_type;
+        typedef typename ft::pair<const Key, T>         value_type;
+        typedef std::size_t                             size_type;
+        typedef std::ptrdiff_t                          difference_type;
+        typedef Compare                                 key_compare;
+        typedef Allocator                               allocator_type;
+        typedef value_type&                             reference;
+        typedef const value_type&                       const_reference;
+        typedef typename allocator_type::pointer        pointer;
+        typedef typename allocator_type::const_pointer  const_pointer;
+        // Need to make iterators
+        typedef ft::reverse_iterator<iterator>          reverse_iterator;
+        typedef ft::reverse_iterator<const_iterator>    const_reverse_iterator;
 
         /* Attributes *************************************************************** */
         private:
