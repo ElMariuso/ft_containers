@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 23:47:52 by root              #+#    #+#             */
-/*   Updated: 2022/12/12 16:44:00 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/12/13 13:55:28 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -249,7 +249,7 @@ namespace ft
             i = 0;
             tmp = this->begin();
             while (tmp++ != position)
-                    i++;
+                i++;
 			if ((this->_size + n) > this->_capacity)
 				this->reserve(this->_size + n);
 			for (size_type j = n + this->_size - 1; j > i + n - 1; j--)
@@ -276,9 +276,9 @@ namespace ft
             i = 0;
             n = 0;
             tmp = this->begin();
+            tmp2 = first;
             while (tmp++ != position)
                 i++;
-            tmp2 = first;
             while (tmp2++ != last)
                 n++;
 			if ((this->_size + n) > this->_capacity)
@@ -288,10 +288,9 @@ namespace ft
 				this->_alloc.construct(this->_begin + j, this->_begin[j - n]);
 				this->_alloc.destroy(this->_begin + j - n);
 			}
-			for (size_type k = i; k < i + n; k++)
+			for (size_type k = 0; k < n; k++)
 			{
-				this->_alloc.construct(this->_begin + k, *first);
-                first++;
+				this->_alloc.construct(this->_begin + i + k, first[k]);
 				this->_size++;
 			}
         }
