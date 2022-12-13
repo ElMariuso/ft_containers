@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   algorithm.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 20:44:16 by root              #+#    #+#             */
-/*   Updated: 2022/12/05 18:54:05 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/12/13 21:40:00 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ namespace ft
     template <class InputIt1, class InputIt2>
     bool lexicographical_compare(InputIt1 first1, InputIt1 last1, InputIt2 first2, InputIt2 last2)
     {
-        return (ft::_lexicographical_compare(first1, last1, first2, last2, less<typename ft::iterator_traits<InputIt1>::value_type,
+        return (ft::_lexicographical_compare(first1, last1, first2, last2, ft::less<typename ft::iterator_traits<InputIt1>::value_type,
             typename ft::iterator_traits<InputIt2>::value_type>()));
     }
 }
