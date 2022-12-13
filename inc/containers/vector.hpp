@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 23:47:52 by root              #+#    #+#             */
-/*   Updated: 2022/12/13 17:05:07 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/12/13 18:13:11 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,13 @@ namespace ft
             if (*this == x)
                 return (*this);
             this->clear();
-            this->assign(x.begin(), x.end());
+            this->_alloc.deallocate(this->_begin, this->_size);
+            this->_begin = this->_alloc.allocate(x._size);
+            this->_capacity = x._size;
+            this->_size = x._size;
+            this->_alloc = x._alloc;
+            for (size_type i = 0; i < this->_size; ++i)
+                this->_alloc.construct(this->_begin + i, x[i]);
             return (*this);
         }
 
@@ -185,11 +191,13 @@ namespace ft
         /* reserve */
         void    reserve(size_type n)
         {
+            pointer tmp;
+            
             if (n > this->max_size())
                 throw (std::length_error("vector"));
             if (n <= this->_capacity)
                 return ;
-            pointer tmp = this->_alloc.allocate(n);
+            tmp = this->_alloc.allocate(n);
             for (size_t i = 0; i != this->_size; i++)
             {
                 this->_alloc.construct(tmp + i, this->_begin[i]);
@@ -235,6 +243,8 @@ namespace ft
             size_type   i;
 
             i = position - this->begin();
+            if (position > this->end() || position < this->begin())
+                throw (std::length_error("vector"));
 			if ((this->_size + n) > this->_capacity && n < this->_size)
                 this->reserve(this->_size * 2);
 			else if ((this->_size + n) > this->_capacity)
@@ -260,6 +270,8 @@ namespace ft
             
             i = position - this->begin();
             n = last - first;
+            if (!this->_begin || position > this->end() || position < this->begin() || first > last)
+                throw (std::length_error("vector"));
             if ((this->_size + n) > this->_capacity && n < this->_size)
                 this->reserve(this->_size * 2);
 			else if ((this->_size + n) > this->_capacity)
@@ -348,6 +360,8 @@ namespace ft
         /* swap */
         void    swap(vector& x)
         {
+            if (*this == x)
+                return ;
             ft::swap(this->_alloc, x._alloc);
 			ft::swap(this->_capacity, x._capacity);
 			ft::swap(this->_begin, x._begin);
