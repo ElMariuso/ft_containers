@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stack.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 23:47:50 by root              #+#    #+#             */
-/*   Updated: 2022/12/13 18:55:01 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/12/13 21:11:50 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ namespace ft
         /***** Element access *****/
         /* top */
         reference top() { return (this->c.back()); }
+        const_reference top() const { return (this->c.back()); }
         
         /***** Capacity *****/
         /* empty */
