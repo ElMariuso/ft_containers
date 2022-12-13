@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 16:56:02 by mthiry            #+#    #+#             */
-/*   Updated: 2022/12/13 14:13:57 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/12/13 17:05:51 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 # include <cstddef>
 # include <memory>
+# include <iostream>
 
 # include <iterator>
 
@@ -256,7 +257,6 @@ namespace ft
             vt_iterator& operator+=(difference_type n) { this->current += n; return (*this); }
             /* operator+ */
             vt_iterator operator+(difference_type n) const { return (vt_iterator(this->current + n)); }
-            typename vt_iterator<Iter>::difference_type operator+(vt_iterator &x) { return (this->base() + x.base()); };
             /* operator-- */
             vt_iterator& operator--() { --this->current; return (*this); }
             /* --operator (operator--(int)) */
@@ -272,7 +272,6 @@ namespace ft
             vt_iterator& operator-=(difference_type n) { this->current -= n; return (*this); }
             /* operator- */
             vt_iterator operator-(difference_type n) const { return (vt_iterator(this->current - n)); }
-            typename vt_iterator<Iter>::difference_type operator-(vt_iterator &x) { return (this->base() - x.base()); };
     };
     /* Non-Member function ****************************************************** */
     /* operator== */
@@ -321,10 +320,7 @@ namespace ft
     /* operator- */
     template <class Iter1, class Iter2>
     typename vt_iterator<Iter1>::difference_type
-    operator-(const vt_iterator<Iter1> &lhs, const vt_iterator<Iter2> &rhs)
-    {
-        return (rhs.base() - lhs.base());
-    }
+    operator-(const vt_iterator<Iter1> &lhs, const vt_iterator<Iter2> &rhs) { return (lhs.base() - rhs.base()); }
 }
 
 #endif

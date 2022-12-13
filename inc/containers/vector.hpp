@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 23:47:52 by root              #+#    #+#             */
-/*   Updated: 2022/12/13 13:55:28 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/12/13 17:05:07 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,7 @@ namespace ft
             typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = 0)
             : _alloc(alloc), _size(0)
         {
-            InputIterator tmp(first);
-
-            while (tmp++ != last)
-                    this->_size++;
+            this->_size = last - first;
             this->_capacity = this->_size;
             this->_begin = this->_alloc.allocate(this->_size);
             for (size_type i = 0; first != last; ++first, ++i)
@@ -109,11 +106,7 @@ namespace ft
             if (*this == x)
                 return (*this);
             this->clear();
-            this->_alloc = x._alloc;
-            this->_size = x._size;
-            this->reserve(this->_size);
-            for (size_t i = 0; i != this->_size; i++)
-                this->_alloc.construct(this->_begin + i, x[i]);
+            this->assign(x.begin(), x.end());
             return (*this);
         }
 
@@ -223,12 +216,8 @@ namespace ft
         iterator insert(iterator position, const value_type& val)
         {
             size_type   i;
-            iterator    tmp;
             
-            i = 0;
-            tmp = this->begin();
-            while (tmp++ != position)
-                i++;
+            i = position - this->begin();
             if (this->_capacity == this->_size)
 				this->reserve(this->_size * 2);
 			for (size_type j = this->_size; j > i; j--)
@@ -244,13 +233,11 @@ namespace ft
         void    insert(iterator position, size_type n, const value_type& val)
         {
             size_type   i;
-            iterator    tmp;
-            
-            i = 0;
-            tmp = this->begin();
-            while (tmp++ != position)
-                i++;
-			if ((this->_size + n) > this->_capacity)
+
+            i = position - this->begin();
+			if ((this->_size + n) > this->_capacity && n < this->_size)
+                this->reserve(this->_size * 2);
+			else if ((this->_size + n) > this->_capacity)
 				this->reserve(this->_size + n);
 			for (size_type j = n + this->_size - 1; j > i + n - 1; j--)
 			{
@@ -270,27 +257,22 @@ namespace ft
         {
             size_type       i;
             size_type       n;
-            iterator        tmp;
-            InputIterator   tmp2;
             
-            i = 0;
-            n = 0;
-            tmp = this->begin();
-            tmp2 = first;
-            while (tmp++ != position)
-                i++;
-            while (tmp2++ != last)
-                n++;
-			if ((this->_size + n) > this->_capacity)
+            i = position - this->begin();
+            n = last - first;
+            if ((this->_size + n) > this->_capacity && n < this->_size)
+                this->reserve(this->_size * 2);
+			else if ((this->_size + n) > this->_capacity)
 				this->reserve(this->_size + n);
 			for (size_type j = n + this->_size - 1; j > i + n - 1; j--)
 			{
 				this->_alloc.construct(this->_begin + j, this->_begin[j - n]);
 				this->_alloc.destroy(this->_begin + j - n);
 			}
-			for (size_type k = 0; k < n; k++)
+			for (size_type k = i; k < i + n; k++)
 			{
-				this->_alloc.construct(this->_begin + i + k, first[k]);
+				this->_alloc.construct(this->_begin + k, *first);
+                ++first;
 				this->_size++;
 			}
         }
@@ -299,12 +281,8 @@ namespace ft
         iterator erase (iterator position)
         {
             size_type   index;
-            iterator    tmp;
 
-            index = 0;
-            tmp = this->begin();
-            while (tmp++ != position)
-                index++;
+            index = position - this->begin();
             this->_size--;
             for (size_type i = index; i < this->_size; i++)
             {
@@ -318,16 +296,9 @@ namespace ft
         {
             size_type   index;
             size_type   n;
-            iterator    tmp;
-
-            index = 0;
-            n = 0;
-            tmp = this->begin();
-            while (tmp++ != first)
-                index++;
-            tmp = first;
-            while (tmp++ != last)
-                n++;
+            
+            index = first - this->begin();
+            n = last - first;
             this->_size -= n;
             for (size_type i = index; i < this->_size; i++)
             {
