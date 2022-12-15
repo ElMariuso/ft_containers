@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 14:26:52 by mthiry            #+#    #+#             */
-/*   Updated: 2022/12/15 22:31:57 by root             ###   ########.fr       */
+/*   Updated: 2022/12/15 22:37:12 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,7 +175,7 @@ namespace ft
         bool operator==(const tree_node &x) { return (this->value == x.value); }
 
         /* parent_unsafe */
-        parent parent_unsafe() const { return (this->parent); }
+        tree_node *parent_unsafe() const { return (this->parent); }
 
         /* set_parent */
         void set_parent(tree_node *p) { this->parent = p; }
@@ -209,6 +209,16 @@ namespace ft
 
         /* Destructor */
         virtual ~tree_iterator() {}
+
+        /* operator= */
+        tree_iterator& operator=(const tree_iterator &x)
+        {
+            if (*this == x)
+                return (*this);
+            this->nptr = x.nptr;
+            this->comp = x.comp;
+            return (*this);
+        }
 
         /* operator* */
         reference operator*() const { return (*(this->nptr)); }
@@ -267,25 +277,99 @@ namespace ft
     };
 
     // /* tree_const_iterator ********************************************************** */
-    // template <typename T, class Compare>
-    // class tree_const_iterator: ft::iterator<ft::bidirectional_iterator_tag, T>
-    // {
-    //     /* Member types ************************************************************* */
-    //     public:
+    template <typename T, class Compare>
+    class tree_const_iterator: ft::iterator<ft::bidirectional_iterator_tag, T>
+    {
+        /* Member types ************************************************************* */
+        public:
+            typedef typename T::value_type                                                                  value_type;
+            typedef typename ft::iterator<ft::bidirectional_iterator_tag, value_type>::iterator_category    iterator_category;
+            typedef typename ft::iterator<ft::bidirectional_iterator_tag, value_type>::difference_type      difference_type;
+            typedef typename ft::iterator<ft::bidirectional_iterator_tag, value_type>::pointer              pointer;
+            typedef typename ft::iterator<ft::bidirectional_iterator_tag, value_type>::reference            reference;
+            typedef T*                                                                                      iter_pointer;
 
-    //     /* Attributes *************************************************************** */
-    //     private:
-    //         T       *node;
-    //         Compare comp;
+        /* Attributes *************************************************************** */
+        private:
+            iter_pointer    nptr;
+            Compare         comp;
 
-    //     public:
-    //     /* Member functions ********************************************************* */
-    //     /***** Basic *****/
-    //     /* Constructor */
+        public:
+        /* Member functions ********************************************************* */
+        /***** Basic *****/
+        /* Constructor */
+        tree_const_iterator(const Compare &comp = Compare()): nptr(), comp(comp) {}
+        tree_const_iterator(iter_pointer *node, const Compare &comp = Compare()): nptr(node), comp(comp) {}
+        tree_const_iterator(const tree_const_iterator &x): nptr(x.nptr), comp() {}
 
-    //     /***** Utils Functions *****/
-    //     private:
-    // };
+        /* Destructor */
+        virtual ~tree_const_iterator() {}
+
+        /* operator= */
+        tree_const_iterator& operator=(const tree_const_iterator &x)
+        {
+            if (*this == x)
+                return (*this);
+            this->nptr = x.nptr;
+            this->comp = x.comp;
+            return (*this);
+        }
+
+        /* operator* */
+        reference operator*() const { return (*(this->nptr)); }
+
+        /* operator-> */
+        pointer operator->() { return (std::addressof(this->operator*())); }
+
+        /* operator++ */
+        tree_const_iterator& operator++()
+        {
+            this->nptr = static_cast<iter_pointer>(tree_next<iter_pointer>(this->nptr));
+            return (*this);
+        }
+
+        /* operator++(int) */
+        tree_const_iterator operator++(int)
+        {
+            tree_iterator t(*this);
+            
+            ++(*this);
+            return (t);
+        }
+
+        /* operator-- */
+        tree_const_iterator& operator--()
+        {
+            this->nptr = static_cast<iter_pointer>(tree_prev<iter_pointer>(this->nptr));
+            return (*this);
+        }
+
+        /* operator--(int) */
+        tree_const_iterator operator--(int)
+        {
+            tree_iterator t(*this);
+            
+            --(*this);
+            return (t);
+        }
+
+        /* operator== */
+        bool operator==(const tree_const_iterator &x, const tree_const_iterator &y)
+        { return (x.nptr == y.nptr); }
+
+        /* operator!= */
+        bool operator!=(const tree_const_iterator &x, const tree_const_iterator &y)
+        { return (!(x == y)); }
+
+        /* has_next */
+        bool has_next() const { return (this->nptr->next != NULL) };
+
+        /* has_prev */
+        bool has_prev() const { return (this->nptr->prev != NULL) };
+
+        /***** Utils Functions *****/
+        private:
+    };
 
     /* tree ********************************************************************* */
     template <class T, class Compare = ft::less<T>, class Node = ft::tree_node<T>,
