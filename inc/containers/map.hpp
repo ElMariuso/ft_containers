@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 23:47:46 by root              #+#    #+#             */
-/*   Updated: 2022/12/15 13:51:38 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/12/15 14:08:31 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ namespace ft
             typedef ft::reverse_iterator<const_iterator>    const_reverse_iterator;
         
         /* Member classes *********************************************************** */
-        class value_compare
+        class value_compare: ft::binary_function<value_type, value_type, bool>
         {
             /* Member types ************************************************************* */
             public:
@@ -63,14 +63,13 @@ namespace ft
             
             /* Attributes *************************************************************** */
             protected:
+                /* Reals attributes */
                 Compare comp;
+                /* Constructor */
+                value_compare(Compare c): comp(c) {}
             
             public:
             /* Member functions ********************************************************* */
-            /***** Basic *****/
-            /* Constructor */
-            value_compare(Compare c): comp(c) {}
-            
             /* operator() */
             bool operator()(const value_type &x, const value_type &y) const
             { return (comp(x.first, y.first)); }
@@ -296,13 +295,51 @@ namespace ft
         }
 
         /* value_comp */
-        // ??
+        ft::map::value_compare value_comp() const
+        {
+            
+        }
 
         /***** Utils Functions *****/
         private:
     };
     /* Non-member function overloads ******************************************** */
     /* relational operators */
+    template <class Key, class T, class Compare, class Alloc>
+    bool operator==(const ft::map<Key, T, Compare, Alloc> &lhs, const ft::map<Key, T, Compare, Alloc> &rhs)
+    {
+        
+    }
+
+    template <class Key, class T, class Compare, class Alloc>
+    bool operator!=(const ft::map<Key, T, Compare, Alloc> &lhs, const ft::map<Key, T, Compare, Alloc> &rhs)
+    {
+        
+    }
+
+    template <class Key, class T, class Compare, class Alloc>
+    bool operator<(const ft::map<Key, T, Compare, Alloc> &lhs, const ft::map<Key, T, Compare, Alloc> &rhs)
+    {
+        
+    }
+
+    template <class Key, class T, class Compare, class Alloc>
+    bool operator<=(const ft::map<Key, T, Compare, Alloc> &lhs, const ft::map<Key, T, Compare, Alloc> &rhs)
+    {
+        
+    }
+
+    template <class Key, class T, class Compare, class Alloc>
+    bool operator>(const ft::map<Key, T, Compare, Alloc> &lhs, const ft::map<Key, T, Compare, Alloc> &rhs)
+    {
+        
+    }
+
+    template <class Key, class T, class Compare, class Alloc>
+    bool operator>=(const ft::map<Key, T, Compare, Alloc> &lhs, const ft::map<Key, T, Compare, Alloc> &rhs)
+    {
+        
+    }
 }
 
 #endif
