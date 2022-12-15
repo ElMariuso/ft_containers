@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 23:47:46 by root              #+#    #+#             */
-/*   Updated: 2022/12/13 21:21:59 by root             ###   ########.fr       */
+/*   Updated: 2022/12/15 13:51:38 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include <stdexcept>
 # include <iostream>
 
+# include <map>
+
 /* Includes.h *************************************************************** */
 
 # include "../utils/algorithm.hpp"
@@ -30,28 +32,52 @@
 
 namespace ft
 {
-    template <class Key, class T, class Compare = ft::less<Key>, class Allocator = std::allocator<ft::pair<const Key, T>> >
+    template <class Key, class T, class Compare = ft::less<Key>, class Allocator = std::allocator<ft::pair<const Key, T> > >
     class map
     {
         /* Member types ************************************************************* */
         public:
-        typedef Key                                     key_type;
-        typedef T                                       mapped_type;
-        typedef typename ft::pair<const Key, T>         value_type;
-        typedef std::size_t                             size_type;
-        typedef std::ptrdiff_t                          difference_type;
-        typedef Compare                                 key_compare;
-        typedef Allocator                               allocator_type;
-        typedef value_type&                             reference;
-        typedef const value_type&                       const_reference;
-        typedef typename allocator_type::pointer        pointer;
-        typedef typename allocator_type::const_pointer  const_pointer;
-        // Need to make iterators
-        typedef ft::reverse_iterator<iterator>          reverse_iterator;
-        typedef ft::reverse_iterator<const_iterator>    const_reverse_iterator;
+            typedef Key                                     key_type;
+            typedef T                                       mapped_type;
+            typedef typename ft::pair<const Key, T>         value_type;
+            typedef std::size_t                             size_type;
+            typedef std::ptrdiff_t                          difference_type;
+            typedef Compare                                 key_compare;
+            typedef Allocator                               allocator_type;
+            typedef value_type&                             reference;
+            typedef const value_type&                       const_reference;
+            typedef typename allocator_type::pointer        pointer;
+            typedef typename allocator_type::const_pointer  const_pointer;
+            // Need to make iterators
+            typedef ft::reverse_iterator<iterator>          reverse_iterator;
+            typedef ft::reverse_iterator<const_iterator>    const_reverse_iterator;
+        
+        /* Member classes *********************************************************** */
+        class value_compare
+        {
+            /* Member types ************************************************************* */
+            public:
+                typedef bool        result_type;
+                typedef value_type  first_argument_type;
+                typedef value_type  second_argument_type;
+            
+            /* Attributes *************************************************************** */
+            protected:
+                Compare comp;
+            
+            public:
+            /* Member functions ********************************************************* */
+            /***** Basic *****/
+            /* Constructor */
+            value_compare(Compare c): comp(c) {}
+            
+            /* operator() */
+            bool operator()(const value_type &x, const value_type &y) const
+            { return (comp(x.first, y.first)); }
+        }
 
         /* Attributes *************************************************************** */
-        private:
+        protected:
 
         public:
         /* Member functions ********************************************************* */

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_containers.hpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 13:54:24 by root              #+#    #+#             */
-/*   Updated: 2022/12/02 13:16:25 by root             ###   ########.fr       */
+/*   Updated: 2022/12/15 14:01:39 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 /* Containers *************************************************************** */
 
 # include "../inc/containers/vector.hpp"
-// # include "../inc/containers/stack.hpp"
-// # include "../inc/containers/map.hpp"
+# include "../inc/containers/stack.hpp"
+# include "../inc/containers/map.hpp"
 
 /* Utils ******************************************************************** */
 
@@ -25,6 +25,7 @@
 # include "../inc/utils/type_traits.hpp"
 # include "../inc/utils/iterator.hpp"
 # include "../inc/utils/algorithm.hpp"
+# include "../inc/utils/functional.hpp"
 
 /* Tests ******************************************************************** */
 

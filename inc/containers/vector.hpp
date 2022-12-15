@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 23:47:52 by root              #+#    #+#             */
-/*   Updated: 2022/12/13 18:18:38 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/12/15 14:01:19 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include "../utils/iterator.hpp"
 # include "../utils/type_traits.hpp"
 # include "../utils/utility.hpp"
+# include "../utils/functional.hpp"
 
 /* Class ******************************************************************** */
 
@@ -49,7 +50,7 @@ namespace ft
             typedef ft::reverse_iterator<const_iterator>        const_reverse_iterator;
         
         /* Attributes *************************************************************** */
-        private:
+        protected:
             allocator_type  _alloc;
             pointer         _begin;
             size_type       _size;
