@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 13:54:24 by root              #+#    #+#             */
-/*   Updated: 2022/12/15 14:01:39 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/12/15 17:13:28 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # include "../inc/utils/iterator.hpp"
 # include "../inc/utils/algorithm.hpp"
 # include "../inc/utils/functional.hpp"
+# include "../inc/utils/tree.hpp"
 
 /* Tests ******************************************************************** */
 
