@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 14:26:52 by mthiry            #+#    #+#             */
-/*   Updated: 2022/12/15 22:27:26 by root             ###   ########.fr       */
+/*   Updated: 2022/12/15 22:31:57 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,7 +203,12 @@ namespace ft
         /* Member functions ********************************************************* */
         /***** Basic *****/
         /* Constructor */
-        tree_iterator(iter_pointer p): nptr(p) {}
+        tree_iterator(const Compare &comp = Compare()): nptr(), comp(comp) {}
+        tree_iterator(iter_pointer *node, const Compare &comp = Compare()): nptr(node), comp(comp) {}
+        tree_iterator(const tree_iterator &x): nptr(x.nptr), comp() {}
+
+        /* Destructor */
+        virtual ~tree_iterator() {}
 
         /* operator* */
         reference operator*() const { return (*(this->nptr)); }
