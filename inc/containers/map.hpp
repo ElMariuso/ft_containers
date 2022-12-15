@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 23:47:46 by root              #+#    #+#             */
-/*   Updated: 2022/12/15 14:08:31 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/12/15 15:48:24 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <iostream>
 
 # include <map>
+# include <iterator>
 
 /* Includes.h *************************************************************** */
 
@@ -27,11 +28,28 @@
 # include "../utils/iterator.hpp"
 # include "../utils/type_traits.hpp"
 # include "../utils/utility.hpp"
+# include "../utils/functional.hpp"
+# include "../utils/tree.hpp"
 
 /* Class ******************************************************************** */
 
 namespace ft
-{
+{   
+    /* map_iterator ************************************************************* */
+    template <class TreeIterator>
+    class map_iterator
+    {
+        
+    };
+
+    /* const_map_iterator ******************************************************* */
+    template <class TreeIterator>
+    class const_map_iterator
+    {
+        
+    };
+
+    /* map ********************************************************************** */
     template <class Key, class T, class Compare = ft::less<Key>, class Allocator = std::allocator<ft::pair<const Key, T> > >
     class map
     {
@@ -48,6 +66,7 @@ namespace ft
             typedef const value_type&                       const_reference;
             typedef typename allocator_type::pointer        pointer;
             typedef typename allocator_type::const_pointer  const_pointer;
+            typedef 
             // Need to make iterators
             typedef ft::reverse_iterator<iterator>          reverse_iterator;
             typedef ft::reverse_iterator<const_iterator>    const_reverse_iterator;
@@ -55,6 +74,8 @@ namespace ft
         /* Member classes *********************************************************** */
         class value_compare: ft::binary_function<value_type, value_type, bool>
         {
+            friend class ft::map;
+            
             /* Member types ************************************************************* */
             public:
                 typedef bool        result_type;
@@ -76,6 +97,7 @@ namespace ft
         }
 
         /* Attributes *************************************************************** */
+        private:
         protected:
 
         public:
