@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tree.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 14:26:52 by mthiry            #+#    #+#             */
-/*   Updated: 2022/12/15 18:44:40 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/12/15 22:27:26 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,14 @@ namespace ft
     template <class NodePtr>
     NodePtr tree_next(NodePtr x)
     {
+        NodePtr xx;
+
         if (x->right != NULL)
             return (tree_min(x->right));
-        while (!tree_is_left_child(x))
-            x = x->parent_unsafe();
-        return (x->parent_unsafe());
+        xx = x;
+        while (!tree_is_left_child(xx))
+            xx = xx->parent_unsafe();
+        return (xx->parent_unsafe());
     }
 
     /* tree_prev */
