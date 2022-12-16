@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 14:26:52 by mthiry            #+#    #+#             */
-/*   Updated: 2022/12/15 22:37:12 by root             ###   ########.fr       */
+/*   Updated: 2022/12/16 19:08:02 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -276,7 +276,7 @@ namespace ft
         private:
     };
 
-    // /* tree_const_iterator ********************************************************** */
+    /* tree_const_iterator ********************************************************** */
     template <typename T, class Compare>
     class tree_const_iterator: ft::iterator<ft::bidirectional_iterator_tag, T>
     {
