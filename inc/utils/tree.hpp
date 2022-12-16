@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 14:26:52 by mthiry            #+#    #+#             */
-/*   Updated: 2022/12/16 19:08:02 by root             ###   ########.fr       */
+/*   Updated: 2022/12/16 20:01:04 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -373,16 +373,50 @@ namespace ft
 
     /* tree ********************************************************************* */
     template <class T, class Compare = ft::less<T>, class Node = ft::tree_node<T>,
-        class Alloc = std::allocator<T>, class Node_Alloc = std::allocator<Node> >
+        class Allocator = std::allocator<T>, class Node_Alloc = std::allocator<Node> >
     class tree
     {
+        /* Member types ************************************************************* */
         public:
+            typedef T                                           value_type;
+            typedef Compare                                     value_compare;
+            typedef Allocator                                   allocator_type;
+            typedef Node_Alloc                                  node_alloc;
+            typedef value_type&                                 reference;
+            typedef const value_type&                           const_reference;
+            typedef typename allocator_type::size_type          size_type;
+            typedef typename allocator_type::difference_type    difference_type;
+            typedef typename allocator_type::pointer            pointer;
+            typedef typename allocator_type::const_pointer      const_pointer;
+            typedef Node                                        node_type;
+            typedef Node*                                       node_pointer;
+            typedef ft::tree_iterator<Node, Compare>            iterator;
+            typedef ft::tree_const_iterator<Node, Compare>      const_iterator;
 
+        /* Attributes *************************************************************** */
         private:
+            node_pointer    node;
+            node_alloc      node_alloc;
 
         public:
+        /* Member functions ********************************************************* */
+        /***** Basic *****/
+        /* Constructor */
+        tree(const node_alloc &node_alloc = node_alloc()): node_alloc(node_alloc)
+        {
+            this->node = this->node_alloc.allocate(1);
+            this->node_alloc.construct(node, Node(node, node, node));
+        }
 
-        private:  
+        /* Destructor */
+        ~tree()
+        {
+            this->node_alloc.destroy(node);
+            this->node_alloc.deallocate(node, 1);
+        }
+
+        /***** Utils Functions *****/
+        private:
     };
 }
 
