@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 14:26:52 by mthiry            #+#    #+#             */
-/*   Updated: 2022/12/19 12:40:48 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/12/19 12:42:36 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -422,6 +422,8 @@ namespace ft
         /* search */
 
         /* swap */
+
+        /* max_size */
 
         /***** Utils Functions *****/
         private:
