@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tree.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 14:26:52 by mthiry            #+#    #+#             */
-/*   Updated: 2022/12/19 12:42:36 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/12/19 20:07:17 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -422,6 +422,13 @@ namespace ft
         /* search */
 
         /* swap */
+        void swap(tree &x)
+        {
+            if (*this == x)
+                return ;
+            ft::swap(this->node, x.node);
+			ft::swap(this->node_alloc, x.node_alloc);
+        }
 
         /* max_size */
 
