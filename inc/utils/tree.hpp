@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tree.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 14:26:52 by mthiry            #+#    #+#             */
-/*   Updated: 2022/12/16 20:01:04 by root             ###   ########.fr       */
+/*   Updated: 2022/12/19 12:40:48 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -414,6 +414,14 @@ namespace ft
             this->node_alloc.destroy(node);
             this->node_alloc.deallocate(node, 1);
         }
+
+        /* insert */
+
+        /* destroy */
+
+        /* search */
+
+        /* swap */
 
         /***** Utils Functions *****/
         private:
