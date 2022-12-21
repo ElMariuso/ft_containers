@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 14:26:52 by mthiry            #+#    #+#             */
-/*   Updated: 2022/12/21 18:41:33 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/12/21 18:55:47 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,32 +19,6 @@
 
 namespace ft
 {
-    /* functions_utils ********************************************************** */
-    /* tree_is_left_child */
-    template <class NodePtr>
-    bool tree_is_left_child(NodePtr x)
-    {
-        return (x == x->parent->left);
-    }
-
-    /* tree_min */
-    template <class NodePtr>
-    NodePtr tree_min(NodePtr x)
-    {
-        while (x->left != NULL)
-            x = x->left;
-        return (x);
-    }
-
-    /* tree_max */
-    template <class NodePtr>
-    NodePtr tree_max(NodePtr x)
-    {
-        while (x->right != NULL)
-            x = x->right;
-        return (x);
-    }
-
     /* tree_next */
     template <class NodePtr>
     NodePtr tree_next(NodePtr x)
@@ -72,70 +46,6 @@ namespace ft
             xx = xx->parent_unsafe();
         return (xx->parent_unsafe()); 
     }
-
-    /* tree_leaf */
-    template <class NodePtr>
-    NodePtr tree_leaf(NodePtr x)
-    {
-        while (true)
-        {
-            if (x->left != NULL)
-            {
-                x = x->left;
-                continue ;
-            }
-            if (x->right != NULL)
-            {
-                x = x->right;
-                continue ;
-            }
-            break ;
-        }
-        return (x);
-    }
-
-    /* tree_left_rotate */
-    template <class NodePtr>
-    void tree_left_rotate(NodePtr x)
-    {
-        NodePtr y;
-
-        y = x->right;
-        x->right = y->left;
-        if (x->right != NULL)
-            x->right->set_parent(x);
-        y->parent = x->parent;
-        if (tree_is_left_child(x))
-            x->parent->left = y;
-        else
-            x->parent_unsafe()->right = y;
-        y->left = x;
-        x->set_parent(y);
-    }
-
-    /* tree_right_rotate */
-    template <class NodePtr>
-    void tree_right_rotate(NodePtr x)
-    {
-        NodePtr y;
-
-        y = x->left;
-        x->left = y->right;
-        if (x->left != NULL)
-            x->left->set_parent(x);
-        y->parent = x->parent;
-        if (tree_is_left_child(x))
-            x->parent->left = y;
-        else
-            x->parent_unsafe()->right = y;
-        y->right = x;
-        x->set_parent(y);
-    }
-
-    /* tree_balance_after_insert */
-
-    /* tree_remove */
-
     /* tree_node **************************************************************** */
     template <typename T>
     class tree_node
@@ -444,8 +354,8 @@ namespace ft
                 prev_node->right = new_node;
             else
                 prev_node->left = new_node;
-            this->last_node->left = tree_min<Node>(this->last_node->parent);
-            this->last_node->right = tree_max<Node>(this->last_node->parent);
+            this->last_node->left = this->tree_min(this->last_node->parent);
+            this->last_node->right = this->tree_max(this->last_node->parent);
             this->last_node->value.first++;
             return (ft::make_pair(iterator(new_node, last_node), true));
         }
@@ -467,7 +377,7 @@ namespace ft
             {
                 node_pointer    successor;
                 
-                successor = tree_min<Node>(node->right);
+                successor = this->tree_min(node->right);
                 this->replaceDoubleChildren(node, successor);
                 return ;
             }
@@ -525,8 +435,8 @@ namespace ft
             }
             else
                 this->last_node->parent = node->parent;
-            this->last_node->left = tree_min<Node>(this->last_node->parent);
-            this->last_node->right = tree_max<Node>(this->last_node->parent);
+            this->last_node->left = this->tree_min(this->last_node->parent);
+            this->last_node->right = this->tree_max(this->last_node->parent);
             this->last_node->value.first--;
             new_node->parent = node->parent;
             this->_node_alloc.destroy(node);
@@ -565,11 +475,116 @@ namespace ft
                 remove->right = this->last_node;
                 remove->parent = new_node;
             }
-            this->last_node->left = tree_min<Node>(this->last_node->parent);
-            this->last_node->right = tree_max<Node>(this->last_node->parent);
+            this->last_node->left = this->tree_min(this->last_node->parent);
+            this->last_node->right = this->tree_max(this->last_node->parent);
             this->last_node->value.first--;
             this->_node_alloc.destroy(remove);
             this->_node_alloc.deallocate(remove, 1);
+        }
+
+        /* functions_utils ********************************************************** */
+        /* tree_is_left_child */
+        bool tree_is_left_child(node_pointer x)
+        {
+            return (x == x->parent->left);
+        }
+
+        /* tree_min */
+        node_pointer tree_min(node_pointer x)
+        {
+            while (x->left != NULL)
+                x = x->left;
+            return (x);
+        }
+
+        /* tree_max */
+        node_pointer tree_max(node_pointer x)
+        {
+            while (x->right != NULL)
+                x = x->right;
+            return (x);
+        }
+
+        /* tree_next */
+        node_pointer tree_next(node_pointer x)
+        {
+            node_pointer xx;
+
+            if (x->right != NULL)
+                return (tree_min(x->right));
+            xx = x;
+            while (!tree_is_left_child(xx))
+                xx = xx->parent_unsafe();
+            return (xx->parent_unsafe());
+        }
+
+        /* tree_prev */
+        node_pointer tree_prev(node_pointer x)
+        {
+            node_pointer xx;
+        
+            if (x->left != NULL)
+                return (tree_max(x->left));
+            xx = x;
+            while (tree_is_left_child(xx))
+                xx = xx->parent_unsafe();
+            return (xx->parent_unsafe()); 
+        }
+
+        /* tree_leaf */
+        node_pointer tree_leaf(node_pointer x)
+        {
+            while (true)
+            {
+                if (x->left != NULL)
+                {
+                    x = x->left;
+                    continue ;
+                }
+                if (x->right != NULL)
+                {
+                    x = x->right;
+                    continue ;
+                }
+                break ;
+            }
+            return (x);
+        }
+
+        /* tree_left_rotate */
+        void tree_left_rotate(node_pointer x)
+        {
+            node_pointer y;
+
+            y = x->right;
+            x->right = y->left;
+            if (x->right != NULL)
+                x->right->set_parent(x);
+            y->parent = x->parent;
+            if (tree_is_left_child(x))
+                x->parent->left = y;
+            else
+                x->parent_unsafe()->right = y;
+            y->left = x;
+            x->set_parent(y);
+        }
+
+        /* tree_right_rotate */
+        void tree_right_rotate(node_pointer x)
+        {
+            node_pointer y;
+
+            y = x->left;
+            x->left = y->right;
+            if (x->left != NULL)
+                x->left->set_parent(x);
+            y->parent = x->parent;
+            if (tree_is_left_child(x))
+                x->parent->left = y;
+            else
+                x->parent_unsafe()->right = y;
+            y->right = x;
+            x->set_parent(y);
         }
     };
 }
