@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 14:26:52 by mthiry            #+#    #+#             */
-/*   Updated: 2022/12/21 15:43:37 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/12/21 18:41:33 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,16 +196,17 @@ namespace ft
 
         /* Attributes *************************************************************** */
         private:
-            iter_pointer    nptr;
+            iter_pointer    node;
+            iter_pointer    last_node;
             Compare         comp;
 
         public:
         /* Member functions ********************************************************* */
         /***** Basic *****/
         /* Constructor */
-        tree_iterator(const Compare &comp = Compare()): nptr(), comp(comp) {}
-        tree_iterator(iter_pointer *node, const Compare &comp = Compare()): nptr(node), comp(comp) {}
-        tree_iterator(const tree_iterator &x): nptr(x.nptr), comp() {}
+        tree_iterator(const Compare &comp = Compare()): node(), last_node(), comp(comp) {}
+        tree_iterator(iter_pointer node, iter_pointer last_node, const Compare &comp = Compare()): node(node), last_node(last_node), comp(comp) {}
+        tree_iterator(const tree_iterator &x): node(x.node), last_node(x.last_node), comp() {}
 
         /* Destructor */
         virtual ~tree_iterator() {}
@@ -215,21 +216,22 @@ namespace ft
         {
             if (*this == x)
                 return (*this);
-            this->nptr = x.nptr;
+            this->node = x.node;
+            this->last_node = x.last_node;
             this->comp = x.comp;
             return (*this);
         }
 
         /* operator* */
-        reference operator*() const { return (*(this->nptr)); }
+        reference operator*() const { return (this->node->value); }
 
         /* operator-> */
-        pointer operator->() { return (std::addressof(this->operator*())); }
+        pointer operator->() { return (&this->node->value); }
 
         /* operator++ */
         tree_iterator& operator++()
         {
-            this->nptr = static_cast<iter_pointer>(tree_next<iter_pointer>(this->nptr));
+            this->node = static_cast<iter_pointer>(tree_next<iter_pointer>(this->node));
             return (*this);
         }
 
@@ -245,7 +247,7 @@ namespace ft
         /* operator-- */
         tree_iterator& operator--()
         {
-            this->nptr = static_cast<iter_pointer>(tree_prev<iter_pointer>(this->nptr));
+            this->node = static_cast<iter_pointer>(tree_prev<iter_pointer>(this->node));
             return (*this);
         }
 
@@ -259,18 +261,12 @@ namespace ft
         }
 
         /* operator== */
-        bool operator==(const tree_iterator &x, const tree_iterator &y)
-        { return (x.nptr == y.nptr); }
+        bool operator==(const tree_iterator &x)
+        { return (this->node == x.node); }
 
         /* operator!= */
-        bool operator!=(const tree_iterator &x, const tree_iterator &y)
-        { return (!(x == y)); }
-
-        /* has_next */
-        bool has_next() const { return (this->nptr->next != NULL) };
-
-        /* has_prev */
-        bool has_prev() const { return (this->nptr->prev != NULL) };
+        bool operator!=(const tree_iterator &x)
+        { return (this->node != x.node); }
 
         /***** Utils Functions *****/
         private:
@@ -291,16 +287,17 @@ namespace ft
 
         /* Attributes *************************************************************** */
         private:
-            iter_pointer    nptr;
+            iter_pointer    node;
+            iter_pointer    last_node;
             Compare         comp;
 
         public:
         /* Member functions ********************************************************* */
         /***** Basic *****/
         /* Constructor */
-        tree_const_iterator(const Compare &comp = Compare()): nptr(), comp(comp) {}
-        tree_const_iterator(iter_pointer *node, const Compare &comp = Compare()): nptr(node), comp(comp) {}
-        tree_const_iterator(const tree_const_iterator &x): nptr(x.nptr), comp() {}
+        tree_const_iterator(const Compare &comp = Compare()): node(), last_node(), comp(comp) {}
+        tree_const_iterator(iter_pointer node, iter_pointer last_node, const Compare &comp = Compare()): node(node), last_node(last_node), comp(comp) {}
+        tree_const_iterator(const tree_const_iterator &x): node(x.node), last_node(x.last_node), comp() {}
 
         /* Destructor */
         virtual ~tree_const_iterator() {}
@@ -310,28 +307,29 @@ namespace ft
         {
             if (*this == x)
                 return (*this);
-            this->nptr = x.nptr;
+            this->node = x.node;
+            this->last_node = x.last_node;
             this->comp = x.comp;
             return (*this);
         }
 
         /* operator* */
-        reference operator*() const { return (*(this->nptr)); }
+        reference operator*() const { return (this->node->value); }
 
         /* operator-> */
-        pointer operator->() { return (std::addressof(this->operator*())); }
+        pointer operator->() { return (&this->node->value); }
 
         /* operator++ */
         tree_const_iterator& operator++()
         {
-            this->nptr = static_cast<iter_pointer>(tree_next<iter_pointer>(this->nptr));
+            this->node = static_cast<iter_pointer>(tree_next<iter_pointer>(this->node));
             return (*this);
         }
 
         /* operator++(int) */
         tree_const_iterator operator++(int)
         {
-            tree_iterator t(*this);
+            tree_const_iterator t(*this);
             
             ++(*this);
             return (t);
@@ -340,32 +338,26 @@ namespace ft
         /* operator-- */
         tree_const_iterator& operator--()
         {
-            this->nptr = static_cast<iter_pointer>(tree_prev<iter_pointer>(this->nptr));
+            this->node = static_cast<iter_pointer>(tree_prev<iter_pointer>(this->node));
             return (*this);
         }
 
         /* operator--(int) */
         tree_const_iterator operator--(int)
         {
-            tree_iterator t(*this);
+            tree_const_iterator t(*this);
             
             --(*this);
             return (t);
         }
 
         /* operator== */
-        bool operator==(const tree_const_iterator &x, const tree_const_iterator &y)
-        { return (x.nptr == y.nptr); }
+        bool operator==(const tree_const_iterator &x)
+        { return (this->node == x.node); }
 
         /* operator!= */
-        bool operator!=(const tree_const_iterator &x, const tree_const_iterator &y)
-        { return (!(x == y)); }
-
-        /* has_next */
-        bool has_next() const { return (this->nptr->next != NULL) };
-
-        /* has_prev */
-        bool has_prev() const { return (this->nptr->prev != NULL) };
+        bool operator!=(const tree_const_iterator &x)
+        { return (this->node != x.node); }
 
         /***** Utils Functions *****/
         private:
@@ -395,41 +387,109 @@ namespace ft
 
         /* Attributes *************************************************************** */
         private:
-            node_pointer    node;
-            node_alloc      node_alloc_v;
+            node_pointer    last_node;
+            node_alloc      _node_alloc;
 
         public:
         /* Member functions ********************************************************* */
         /***** Basic *****/
         /* Constructor */
-        tree(const node_alloc &node_alloc = node_alloc()): node_alloc_v(node_alloc)
+        tree(const node_alloc &node_alloc_t = node_alloc()): _node_alloc(node_alloc_t)
         {
-            this->node = this->node_alloc_v.allocate(1);
-            this->node_alloc_v.construct(node, Node(node, node, node));
+            this->last_node = this->_node_alloc.allocate(1);
+            this->_node_alloc.construct(this->last_node, Node(this->last_node, this->last_node, this->last_node));
         }
 
         /* Destructor */
         ~tree()
         {
-            this->node_alloc_v.destroy(node);
-            this->node_alloc_v.deallocate(node, 1);
+            this->_node_alloc.destroy(this->last_node);
+            this->_node_alloc.deallocate(this->last_node, 1);
         }
 
         /* insert */
+        ft::pair<iterator, bool> insert(value_type insert)
+        {
+            bool    side;
+            Node    *new_node;
+            Node    *prev_node;
+            Node    *first_node;
+
+            side = true;
+            new_node = this->_node_alloc.allocate(1);
+            prev_node = this->last_node;
+            first_node = this->last_node->parent;
+            while (first_node != this->last_node)
+            {
+                int curkey;
+                curkey = first_node->value.first;
+                if (curkey == insert.first)
+                    return (ft::make_pair(iterator(first_node, last_node), false));
+                prev_node = first_node;
+                if (insert.first > curkey)
+                {
+                    side = true;
+                    first_node = first_node->right;
+                }
+                else
+                {
+                    side = false;
+                    first_node = first_node->left;
+                }
+            }
+            this->_node_alloc.construct(new_node, Node(insert, this->last_node, this->last_node, prev_node));
+            if (prev_node == this->last_node)
+                this->last_node->parent = new_node;
+            else if (side == true)
+                prev_node->right = new_node;
+            else
+                prev_node->left = new_node;
+            this->last_node->left = tree_min<Node>(this->last_node->parent);
+            this->last_node->right = tree_max<Node>(this->last_node->parent);
+            this->last_node->value.first++;
+            return (ft::make_pair(iterator(new_node, last_node), true));
+        }
 
         /* destroy */
+        void    destroy(node_pointer node, value_type remove)
+        {
+            if (remove.first < node->value.first)
+            {
+                this->destroy(node->left, remove);
+                return ;
+            }
+            if (remove.first > node->value.first)
+            {
+                this->destroy(node->right, remove);
+                return ;
+            }
+            if (node->left != this->last_node && node->right != this->last_node)
+            {
+                node_pointer    successor;
+                
+                successor = tree_min<Node>(node->right);
+                this->replaceDoubleChildren(node, successor);
+                return ;
+            }
+            else if (node->left != this->last_node)
+                this->replaceAndReset(node, node->left);
+            else if (node->right != this->last_node)
+                this->replaceAndReset(node, node->right);
+            else
+                this->replaceAndReset(node, this->last_node);
+        }
 
         /* search */
         node_pointer search(value_type search)
         {
             node_pointer    node;
 
-            node = this->node->parent;
-            while (node != this->node)
+            node = this->last_node->parent;
+            while (node != this->last_node)
             {
-                if (node->value == search)
+                if (node->value.first == search.first)
                     return (node);
-                if (node->value > search)
+                if (node->value.first > search.first)
                     node = node->left;
                 else
                     node = node->right;
@@ -442,15 +502,75 @@ namespace ft
         {
             if (*this == x)
                 return ;
-            ft::swap(this->node, x.node);
-			ft::swap(this->node_alloc_v, x.node_alloc_v);
+            ft::swap(this->last_node, x.last_node);
+			ft::swap(this->_node_alloc, x._node_alloc);
         }
 
         /* max_size */
-        size_type max_size() const { return (this->node_alloc_v.max_size()); }
+        size_type max_size() const { return (this->_node_alloc.max_size()); }
 
         /***** Utils Functions *****/
         private:
+        /* replaceAndReset */
+        void    replaceAndReset(node_pointer node, node_pointer new_node)
+        {
+            if (node->parent != this->last_node)
+            {
+                if (this->last_node->parent == node)
+                    this->last_node->parent = new_node;
+                if (node == node->parent->left)
+                    node->parent->left = new_node;
+                else
+                    node->parent->right = new_node;
+            }
+            else
+                this->last_node->parent = node->parent;
+            this->last_node->left = tree_min<Node>(this->last_node->parent);
+            this->last_node->right = tree_max<Node>(this->last_node->parent);
+            this->last_node->value.first--;
+            new_node->parent = node->parent;
+            this->_node_alloc.destroy(node);
+            this->_node_alloc.deallocate(node, 1);
+        }
+
+        /* replaceDoubleChildren */
+        void    replaceDoubleChildren(node_pointer &remove, node_pointer new_node)
+        {
+            if (new_node->parent != this->last_node)
+            {
+                if (new_node->parent != remove)
+                    new_node->parent->left = new_node->right;  
+            }
+            new_node->parent = remove->parent;
+            if (remove->left != new_node)
+                new_node->left = remove->left;
+            if (remove->right != new_node)
+                new_node->right = remove->right;
+            if (remove->parent != this->last_node)
+            {
+                if (remove->parent->left == remove)
+                    remove->parent->left = new_node;
+                else if (remove->parent->right == remove)
+                    remove->parent->right = new_node;
+            }
+            else
+                this->last_node->parent = new_node;
+            if (remove->left != this->last_node && remove->left != new_node)
+                remove->left->parent = new_node;
+            if (remove->right != this->last_node && remove->right != new_node)
+                remove->right->parent = new_node;
+            if (remove->parent != this->last_node)
+            {
+                remove->left = this->last_node;
+                remove->right = this->last_node;
+                remove->parent = new_node;
+            }
+            this->last_node->left = tree_min<Node>(this->last_node->parent);
+            this->last_node->right = tree_max<Node>(this->last_node->parent);
+            this->last_node->value.first--;
+            this->_node_alloc.destroy(remove);
+            this->_node_alloc.deallocate(remove, 1);
+        }
     };
 }
 
