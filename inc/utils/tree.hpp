@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tree.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 14:26:52 by mthiry            #+#    #+#             */
-/*   Updated: 2022/12/19 20:07:17 by root             ###   ########.fr       */
+/*   Updated: 2022/12/21 15:43:37 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -396,23 +396,23 @@ namespace ft
         /* Attributes *************************************************************** */
         private:
             node_pointer    node;
-            node_alloc      node_alloc;
+            node_alloc      node_alloc_v;
 
         public:
         /* Member functions ********************************************************* */
         /***** Basic *****/
         /* Constructor */
-        tree(const node_alloc &node_alloc = node_alloc()): node_alloc(node_alloc)
+        tree(const node_alloc &node_alloc = node_alloc()): node_alloc_v(node_alloc)
         {
-            this->node = this->node_alloc.allocate(1);
-            this->node_alloc.construct(node, Node(node, node, node));
+            this->node = this->node_alloc_v.allocate(1);
+            this->node_alloc_v.construct(node, Node(node, node, node));
         }
 
         /* Destructor */
         ~tree()
         {
-            this->node_alloc.destroy(node);
-            this->node_alloc.deallocate(node, 1);
+            this->node_alloc_v.destroy(node);
+            this->node_alloc_v.deallocate(node, 1);
         }
 
         /* insert */
@@ -420,6 +420,22 @@ namespace ft
         /* destroy */
 
         /* search */
+        node_pointer search(value_type search)
+        {
+            node_pointer    node;
+
+            node = this->node->parent;
+            while (node != this->node)
+            {
+                if (node->value == search)
+                    return (node);
+                if (node->value > search)
+                    node = node->left;
+                else
+                    node = node->right;
+            }
+            return (node);
+        }
 
         /* swap */
         void swap(tree &x)
@@ -427,10 +443,11 @@ namespace ft
             if (*this == x)
                 return ;
             ft::swap(this->node, x.node);
-			ft::swap(this->node_alloc, x.node_alloc);
+			ft::swap(this->node_alloc_v, x.node_alloc_v);
         }
 
         /* max_size */
+        size_type max_size() const { return (this->node_alloc_v.max_size()); }
 
         /***** Utils Functions *****/
         private:
